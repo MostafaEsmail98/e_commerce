@@ -14,8 +14,9 @@ class SplashBody extends StatefulWidget {
 class _SplashBodyState extends State<SplashBody> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3,));
-    GoRouter.of(context).push('/SignIn');
+    Future.delayed(const Duration(seconds: 3,),() {
+      GoRouter.of(context).push('/SignIn');
+    },);
     super.initState();
   }
   @override

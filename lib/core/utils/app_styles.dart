@@ -93,6 +93,12 @@ abstract class AppStyles {
       fontWeight: FontWeight.w600,
       color: textColor,
     );
+  }static TextStyle textSemiBold18(context) {
+    return GoogleFonts.poppins(
+      fontSize: getResponsiveFontSize(context, fontSize: 18),
+      fontWeight: FontWeight.w600,
+      color: textColor,
+    );
   }
 }
 
