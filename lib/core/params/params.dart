@@ -20,3 +20,9 @@ class ForgetPasswordParams{
 
   ForgetPasswordParams({required this.email});
 }
+
+class VerifyCodeParams {
+  final String resetCode;
+
+  VerifyCodeParams({required this.resetCode});
+}

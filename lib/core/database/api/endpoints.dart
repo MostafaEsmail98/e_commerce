@@ -3,6 +3,7 @@ class Endpoints {
   static String signIn = "auth/signin";
   static String signUp = "auth/signup";
   static String forgetPassword = "auth/forgotPasswords";
+  static String verifyCode = "auth/verifyResetCode";
 }
 
 class ApiKey {
@@ -13,4 +14,5 @@ static String token =  "token";
 static String message =  "message";
 static String role =  "role";
 static String statusMsg =  "statusMsg";
+static String status =  "status";
 }
