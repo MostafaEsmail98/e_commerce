@@ -61,6 +61,7 @@ class VerifyCode extends StatelessWidget {
                   onPressed: () {
                     if (context.read<VerifyCodeCubit>().key.currentState!.validate()) {
                       context.read<VerifyCodeCubit>().postVerifyCode();
+                      context.read<VerifyCodeCubit>().codeController.text="";
                     }
                   },
                   child: SizedBox(

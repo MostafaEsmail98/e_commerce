@@ -77,6 +77,9 @@ class ForgetPassword extends StatelessWidget {
                         context
                             .read<ForgetPasswordCubit>()
                             .postForgetPasswordUser();
+                        context
+                            .read<ForgetPasswordCubit>()
+                      .emailController.text="";
                       }
                     },
                     child: SizedBox(

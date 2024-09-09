@@ -124,6 +124,11 @@ class SignUp extends StatelessWidget {
                           .currentState!
                           .validate()) {
                         context.read<SignUpCubit>().postNewUser();
+                        context.read<SignUpCubit>().emailController.text="";
+                        context.read<SignUpCubit>().passwordController.text="";
+                        context.read<SignUpCubit>().rePasswordController.text="";
+                        context.read<SignUpCubit>().mobilController.text="";
+                        context.read<SignUpCubit>().nameController.text="";
                       }
                     },
                     child: SizedBox(
