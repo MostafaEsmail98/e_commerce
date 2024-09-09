@@ -6,6 +6,7 @@ import 'package:e_commrece/features/auth/presentation/widgets/custom_logo.dart';
 import 'package:e_commrece/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
@@ -16,6 +17,9 @@ class ForgetPassword extends StatelessWidget {
       backgroundColor: backGround,
       body: BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
         listener: (context, state) {
+         if  (state is ForgetPasswordSuccessful ){
+           GoRouter.of(context).push("/VerifyCode");
+         }
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: Colors.white,
