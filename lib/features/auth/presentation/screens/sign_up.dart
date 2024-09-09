@@ -1,9 +1,11 @@
 import 'package:e_commrece/core/utils/app_styles.dart';
 import 'package:e_commrece/core/utils/custom_space_height.dart';
 import 'package:e_commrece/core/utils/string.dart';
+import 'package:e_commrece/features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/widgets/custom_logo.dart';
 import 'package:e_commrece/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/k_colors.dart';
@@ -14,18 +16,15 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameController = TextEditingController();
-    TextEditingController mobilController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    GlobalKey <FormState>key = GlobalKey();
     return Scaffold(
       backgroundColor: backGround,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Form(
-            key: key,
+            key: context
+                .read<SignUpCubit>()
+                .key,
             child: Column(
               children: [
                 const CustomLogo(),
@@ -37,7 +36,9 @@ class SignUp extends StatelessWidget {
                       return null;
                     },
                     text: "Enter your full name",
-                    controller: nameController,
+                    controller: context
+                        .read<SignUpCubit>()
+                        .nameController,
                     title: "Full Name"),
                 const CustomSpaceHeight(height: .03),
                 CustomTextField(
@@ -50,7 +51,9 @@ class SignUp extends StatelessWidget {
                       return null;
                     },
                     text: "Enter your mobile no.",
-                    controller: mobilController,
+                    controller: context
+                        .read<SignUpCubit>()
+                        .mobilController,
                     title: "Mobile Number"),
                 const CustomSpaceHeight(height: .03),
                 CustomTextField(
@@ -63,7 +66,9 @@ class SignUp extends StatelessWidget {
                       return null;
                     },
                     text: "Enter your email address",
-                    controller: emailController,
+                    controller: context
+                        .read<SignUpCubit>()
+                        .emailController,
                     title: "E-mail Address"),
                 const CustomSpaceHeight(height: .03),
                 CustomTextField(
@@ -77,24 +82,74 @@ class SignUp extends StatelessWidget {
                     },
                     isPassword: true,
                     text: "Enter your password",
-                    controller: passwordController,
+                    controller: context
+                        .read<SignUpCubit>()
+                        .passwordController,
                     title: "Password"),
+                const CustomSpaceHeight(height: .03),
+                CustomTextField(
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Password cannot be empty";
+                      } else if (val.length < 8) {
+                        return "Password should be more than 7 letters";
+                      } else if (context
+                          .read<SignUpCubit>()
+                          .passwordController
+                          .text !=
+                          context
+                              .read<SignUpCubit>()
+                              .rePasswordController
+                              .text) {
+                        return "Password is not equal";
+                      }
+                      return null;
+                    },
+                    isPassword: true,
+                    text: "Enter your password",
+                    controller:
+                    context
+                        .read<SignUpCubit>()
+                        .rePasswordController,
+                    title: "Confirm Password"),
                 const CustomSpaceHeight(height: .05),
                 ElevatedButton(
                     style: ButtonStyle(
                         shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)))),
                     onPressed: () {
-                      if (key.currentState!.validate()) {
+                      if (context
+                          .read<SignUpCubit>()
+                          .key
+                          .currentState!
+                          .validate()) {
+                        context.read<SignUpCubit>().postNewUser();
                       }
                     },
                     child: SizedBox(
-                      height: MediaQuery.sizeOf(context).height * .06,
+                      height: MediaQuery
+                          .sizeOf(context)
+                          .height * .06,
                       width: double.maxFinite,
-                      child: Center(
-                          child: Text(
-                        "Sign Up",
-                        style: AppStyles.textSemiBold18(context),
+                      child:
+                      Center(child: BlocBuilder<SignUpCubit, SignUpState>(
+                        builder: (context, state) {
+                          if (state is SignUpLoading) {
+                            return const CircularProgressIndicator();
+                          }
+                          else if (state is SignUpSuccessful) {
+                            return Text("Done",
+                              style: AppStyles.textSemiBold18(context),);
+                          }
+                          else if (state is SignUpFailure) {
+                            return Text(state.failure.errMassage,
+                                style: AppStyles.textSemiBold18(context));
+                          }
+                          return Text(
+                            "Sign Up",
+                            style: AppStyles.textSemiBold18(context),
+                          );
+                        },
                       )),
                     )),
                 Center(

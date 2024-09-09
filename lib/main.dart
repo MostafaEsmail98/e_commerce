@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc_observer.dart';
+import 'features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,17 +14,16 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignInCubit(),
-      child: SafeArea(
-        child: MaterialApp.router(
-          routerConfig: AppRouter.routes,
-          debugShowCheckedModeBanner: false,
-        ),
+    return MultiBlocProvider(providers: [
+      BlocProvider<SignInCubit>(create: (context) => SignInCubit(),),
+      BlocProvider<SignUpCubit>(create: (context) => SignUpCubit(),),
+    ], child:  SafeArea(
+      child: MaterialApp.router(
+        routerConfig: AppRouter.routes,
+        debugShowCheckedModeBanner: false,
       ),
-    );
+    ),);
   }
 }

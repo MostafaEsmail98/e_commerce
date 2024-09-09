@@ -9,7 +9,6 @@ final class SignInLoading extends SignInState {}
 
 final class SignInSuccessful extends SignInState {
   SignInEntity signInEntity;
-
   SignInSuccessful(this.signInEntity);
 }
 
