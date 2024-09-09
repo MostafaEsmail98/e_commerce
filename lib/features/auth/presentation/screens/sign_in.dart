@@ -1,9 +1,11 @@
 import 'package:e_commrece/core/utils/app_styles.dart';
 import 'package:e_commrece/core/utils/k_colors.dart';
 import 'package:e_commrece/core/utils/string.dart';
+import 'package:e_commrece/features/auth/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/widgets/custom_text_button.dart';
 import 'package:e_commrece/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/custom_space_height.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_logo.dart';
@@ -13,14 +15,12 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> key = GlobalKey();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       backgroundColor: backGround,
       body: SingleChildScrollView(
         child: Form(
-          key: key,
+          key:  context.read<SignInCubit>().key,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
@@ -57,12 +57,12 @@ class SignIn extends StatelessWidget {
                       return null;
                     },
                     text: "Enter your name",
-                    controller: emailController,
+                    controller:context.read<SignInCubit>().emailController,
                     title: "User Name"),
                 const CustomSpaceHeight(height: .03),
                 CustomTextField(
                   text: "Enter your password",
-                  controller: passwordController,
+                  controller: context.read<SignInCubit>().passwordController,
                   title: "Password",
                   isPassword: true,
                   validator: (val) {
@@ -79,7 +79,13 @@ class SignIn extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: CustomTextButton(text: "Forget password")),
                 const CustomSpaceHeight(height: .03),
-                const CustomButton(),
+                CustomButton(
+                  onPressed: () {
+                    if ( context.read<SignInCubit>().key.currentState!.validate()) {
+                      context.read<SignInCubit>().postUser();
+                    }
+                  },
+                ),
                 const CustomSpaceHeight(height: .02),
                 const Center(
                   child: CustomTextButton(

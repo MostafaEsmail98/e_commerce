@@ -1,4 +1,6 @@
-class TemplateParams {
-  final String id;
-  TemplateParams({required this.id});
+class SignInParams {
+  final String email;
+  final String password;
+
+  SignInParams({required this.email, required this.password});
 }
