@@ -1,3 +1,4 @@
+import 'package:e_commrece/features/auth/presentation/screens/forget_password.dart';
 import 'package:e_commrece/features/auth/presentation/screens/sign_in.dart';
 import 'package:e_commrece/features/auth/presentation/screens/sign_up.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +17,9 @@ abstract class AppRouter {
   ),   GoRoute(
     path: '/SignUp',
     builder: (context, state) => const SignUp(),
+  ),  GoRoute(
+    path: '/ForgetPassword',
+    builder: (context, state) => const ForgetPassword(),
   ),
 
     ]

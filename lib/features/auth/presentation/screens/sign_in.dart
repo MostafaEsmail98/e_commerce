@@ -76,9 +76,13 @@ class SignIn extends StatelessWidget {
                   },
                 ),
                 const CustomSpaceHeight(height: .01),
-                const Align(
+                 Align(
                     alignment: Alignment.centerRight,
-                    child: CustomTextButton(text: "Forget password")),
+                    child: CustomTextButton(
+                        onPressed: () {
+                          GoRouter.of(context).push('/ForgetPassword');
+                        },
+                        text: "Forget password")),
                 const CustomSpaceHeight(height: .03),
                 CustomButton(
                   onPressed: () {
