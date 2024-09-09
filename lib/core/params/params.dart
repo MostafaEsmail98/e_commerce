@@ -14,3 +14,9 @@ class SignUpParams {
 
   SignUpParams({required this.name, required this.mobil, required this.email, required this.password, required  this.rePassword});
 }
+
+class ForgetPasswordParams{
+  final String email;
+
+  ForgetPasswordParams({required this.email});
+}
