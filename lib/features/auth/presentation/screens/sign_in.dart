@@ -6,6 +6,7 @@ import 'package:e_commrece/features/auth/presentation/widgets/custom_text_button
 import 'package:e_commrece/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/utils/custom_space_height.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_logo.dart';
@@ -68,8 +69,8 @@ class SignIn extends StatelessWidget {
                   validator: (val) {
                     if (val!.isEmpty) {
                       return "Password cannot be empty";
-                    } else if (val.length <= 8) {
-                      return "Password should be more than 8 letters";
+                    } else if (val.length < 8) {
+                      return "Password should be more than 7 letters";
                     }
                     return null;
                   },
@@ -87,11 +88,15 @@ class SignIn extends StatelessWidget {
                   },
                 ),
                 const CustomSpaceHeight(height: .02),
-                const Center(
+                 Center(
                   child: CustomTextButton(
+                    onPressed: () {
+                      GoRouter.of(context).push("/SignUp");
+                    },
                     text: "Don’t have an account? Create Account",
                   ),
                 ),
+                const CustomSpaceHeight(height: .02),
               ],
             ),
           ),
