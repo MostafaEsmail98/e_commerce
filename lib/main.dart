@@ -1,5 +1,6 @@
 import 'package:e_commrece/core/utils/routes.dart';
 import 'package:e_commrece/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
+import 'package:e_commrece/features/auth/presentation/manager/reset_password/reset_password_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/manager/verify_code_cubit/verify_code_cubit.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider<SignInCubit>(create: (context) => SignInCubit(),),
+      BlocProvider<ResetPasswordCubit>(create: (context) => ResetPasswordCubit(),),
       BlocProvider<SignUpCubit>(create: (context) => SignUpCubit(),),
       BlocProvider<ForgetPasswordCubit>(create: (context) => ForgetPasswordCubit(),),
       BlocProvider<VerifyCodeCubit>(create: (context) => VerifyCodeCubit(),),
