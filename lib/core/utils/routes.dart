@@ -1,4 +1,5 @@
 import 'package:e_commrece/features/auth/presentation/screens/forget_password.dart';
+import 'package:e_commrece/features/auth/presentation/screens/reset_password.dart';
 import 'package:e_commrece/features/auth/presentation/screens/sign_in.dart';
 import 'package:e_commrece/features/auth/presentation/screens/sign_up.dart';
 import 'package:e_commrece/features/auth/presentation/screens/verify_code.dart';
@@ -24,6 +25,9 @@ abstract class AppRouter {
   ), GoRoute(
     path: '/VerifyCode',
     builder: (context, state) => const VerifyCode(),
+  ),GoRoute(
+    path: '/ResetPassword',
+    builder: (context, state) => const ResetPassword(),
   ),
 
     ]
