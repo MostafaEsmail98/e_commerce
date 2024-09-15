@@ -45,6 +45,7 @@ dependencies:
   dartz: ^0.10.1
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
+  bottom_navy_bar: ^6.1.0
 
 dev_dependencies:
   flutter_test:
