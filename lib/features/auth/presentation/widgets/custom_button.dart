@@ -2,6 +2,7 @@ import 'package:e_commrece/core/utils/app_styles.dart';
 import 'package:e_commrece/features/auth/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../manager/sign_in_cubit/sign_in_state.dart';
 
@@ -23,7 +24,7 @@ class CustomButton extends StatelessWidget {
         child: SizedBox(
           height: MediaQuery.sizeOf(context).height * .06,
           width: double.maxFinite,
-          child: BlocBuilder<SignInCubit, SignInState>(
+          child: BlocConsumer<SignInCubit, SignInState>(
             builder: (context, state) {
               if (state is SignInLoading) {
                 return const Center(child: CircularProgressIndicator());
@@ -48,7 +49,11 @@ class CustomButton extends StatelessWidget {
                   style: AppStyles.textSemiBold18(context),
                 ),
               );
-            },
+            }, listener: (BuildContext context, SignInState state) {
+              if (state is SignInSuccessful){
+                GoRouter.of(context).push("/Home");
+              }
+          },
           ),
         ));
   }
