@@ -1,6 +1,7 @@
 import 'package:e_commrece/core/utils/custom_space_height.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/custom_caraousel_slider.dart';
+import '../../widgets/custom_categories_section.dart';
 import '../../widgets/custom_logo_and_search.dart';
 
 class Home extends StatelessWidget {
@@ -16,7 +17,8 @@ class Home extends StatelessWidget {
             children: [
               CustomLogoAndSearch(),
               CustomSpaceHeight(height: .02),
-              CustomCarouselSlider()
+              CustomCarouselSlider(),
+              CustomCategoriesSection()
             ],
           ),
         ],
