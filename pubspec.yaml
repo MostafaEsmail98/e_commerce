@@ -47,6 +47,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   bottom_navy_bar: ^6.1.0
   get_it: ^7.7.0
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:

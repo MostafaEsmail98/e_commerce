@@ -1,5 +1,4 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:e_commrece/core/generated/assets.dart';
 import 'package:e_commrece/core/utils/k_colors.dart';
 import 'package:e_commrece/features/home/presentation/screens/tabs/categories.dart';
 import 'package:e_commrece/features/home/presentation/screens/tabs/favorite.dart';
@@ -7,6 +6,8 @@ import 'package:e_commrece/features/home/presentation/screens/tabs/home.dart';
 import 'package:e_commrece/features/home/presentation/screens/tabs/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../generated/assets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

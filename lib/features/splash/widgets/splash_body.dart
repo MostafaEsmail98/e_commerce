@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/generated/assets.dart';
+
+import '../../../generated/assets.dart';
 
 
 class SplashBody extends StatefulWidget {
@@ -28,7 +29,7 @@ class _SplashBodyState extends State<SplashBody> {
         ),
         child: Center(
             child: SvgPicture.asset(
-          Assets.imagesLogo,
+          Assets.assetsImagesLogo,
           width: MediaQuery.sizeOf(context).width*.75,
           colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
         )),
