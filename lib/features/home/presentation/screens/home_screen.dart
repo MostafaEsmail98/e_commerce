@@ -1,9 +1,9 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:e_commrece/core/utils/k_colors.dart';
 import 'package:e_commrece/features/home/presentation/screens/tabs/categories.dart';
 import 'package:e_commrece/features/home/presentation/screens/tabs/favorite.dart';
 import 'package:e_commrece/features/home/presentation/screens/tabs/home.dart';
 import 'package:e_commrece/features/home/presentation/screens/tabs/profile.dart';
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  final List<Widget> pages = [
+  List<Widget> pages = [
     const Home(),
     const Categories(),
     const Favorite(),
@@ -42,46 +42,57 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[_currentIndex] ,
-      bottomNavigationBar: BottomNavyBar(
+      body: pages[_currentIndex],
+      bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-        backgroundColor: mainColor,
-        selectedIndex: _currentIndex,
-        onItemSelected: (index) {
-          setState(() => _currentIndex = index);
-          _pageController.jumpToPage(index);
-        },
-        items: <BottomNavyBarItem>[
-          BottomNavyBarItem(
-              activeColor: Colors.white,
-              title: const Center(child: Text('Home')),
-              icon: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: SvgPicture.asset(Assets.imagesHome),
-              )),
-          BottomNavyBarItem(
-              activeColor: Colors.white,
-              title: const Center(child: Text('Categories')),
-              icon: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: SvgPicture.asset(Assets.imagesCategories),
-              )),
-          BottomNavyBarItem(
-              activeColor: Colors.white,
-              title: const Center(child: Text('Favorite')),
-              icon: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: SvgPicture.asset(Assets.imagesFavorite),
-              )),
-          BottomNavyBarItem(
-              activeColor: Colors.white,
-              title: const Center(child: Text('Profile')),
-              icon: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: SvgPicture.asset(Assets.imagesProfile),
-              )),
-        ],
+            topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+        child: FlashyTabBar(
+          backgroundColor: mainColor,
+          selectedIndex: _currentIndex,
+          showElevation: true,
+          onItemSelected: (index) => setState(() {
+            _currentIndex = index;
+          }),
+          items: [
+            FlashyTabBarItem(
+                activeColor: Colors.white,
+                title: const Center(
+                  child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'Home',
+                        style: TextStyle(color: Colors.white),
+                      )),
+                ),
+                icon: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SvgPicture.asset(Assets.imagesHome))),
+            FlashyTabBarItem(
+                activeColor: Colors.white,
+                title: const Center(
+                    child: FittedBox(
+                        fit: BoxFit.scaleDown, child: Text('Categories'))),
+                icon: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SvgPicture.asset(Assets.imagesCategories))),
+            FlashyTabBarItem(
+                activeColor: Colors.white,
+                title: const Center(
+                    child: FittedBox(
+                        fit: BoxFit.scaleDown, child: Text('Favorite'))),
+                icon: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SvgPicture.asset(Assets.imagesFavorite))),
+            FlashyTabBarItem(
+                activeColor: Colors.white,
+                title: const Center(
+                    child: FittedBox(
+                        fit: BoxFit.scaleDown, child: Text('Profile'))),
+                icon: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SvgPicture.asset(Assets.imagesProfile))),
+          ],
+        ),
       ),
     );
   }
