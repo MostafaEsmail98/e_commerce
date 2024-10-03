@@ -9,6 +9,7 @@ class Assets {
   static const String imagesCategories = 'assets/images/categories.svg';
   static const String imagesFavIcon = 'assets/images/favIcon.svg';
   static const String imagesFavorite = 'assets/images/favorite.svg';
+  static const String imagesFavoriteList = 'assets/images/favoriteList.svg';
   static const String imagesHome = 'assets/images/home.svg';
   static const String imagesImage1 = 'assets/images/image1.png';
   static const String imagesImage2 = 'assets/images/image2.png';
