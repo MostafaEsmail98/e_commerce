@@ -57,40 +57,27 @@ class _HomeScreenState extends State<HomeScreen> {
             FlashyTabBarItem(
                 activeColor: Colors.white,
                 title: const Center(
-                  child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        'Home',
-                        style: TextStyle(color: Colors.white),
-                      )),
+                  child: Text(
+                    'Home',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
-                icon: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: SvgPicture.asset(Assets.imagesHome))),
+                icon: SvgPicture.asset(Assets.imagesHome)),
             FlashyTabBarItem(
                 activeColor: Colors.white,
                 title: const Center(
-                    child: FittedBox(
-                        fit: BoxFit.scaleDown, child: Text('Categories'))),
-                icon: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: SvgPicture.asset(Assets.imagesCategories))),
+                    child: Text('Categories')),
+                icon: SvgPicture.asset(Assets.imagesCategories)),
             FlashyTabBarItem(
                 activeColor: Colors.white,
                 title: const Center(
-                    child: FittedBox(
-                        fit: BoxFit.scaleDown, child: Text('Favorite'))),
-                icon: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: SvgPicture.asset(Assets.imagesFavorite))),
+                    child: Text('Favorite')),
+                icon: SvgPicture.asset(Assets.imagesFavorite)),
             FlashyTabBarItem(
                 activeColor: Colors.white,
                 title: const Center(
-                    child: FittedBox(
-                        fit: BoxFit.scaleDown, child: Text('Profile'))),
-                icon: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: SvgPicture.asset(Assets.imagesProfile))),
+                    child: Text('Profile')),
+                icon: SvgPicture.asset(Assets.imagesProfile)),
           ],
         ),
       ),
