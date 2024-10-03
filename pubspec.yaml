@@ -48,6 +48,7 @@ dependencies:
   flashy_tab_bar2: ^0.0.10
   get_it: ^7.7.0
   carousel_slider: ^5.0.0
+  device_preview: ^1.2.0
 
 dev_dependencies:
   flutter_test:

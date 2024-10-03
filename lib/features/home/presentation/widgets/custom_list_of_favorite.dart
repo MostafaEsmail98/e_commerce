@@ -15,10 +15,10 @@ class ListOfFavorite extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return AspectRatio(
-          aspectRatio: 400 / 115,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: AspectRatio(
+            aspectRatio: 400 / 120,
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(color: mainColor),
@@ -32,24 +32,28 @@ class ListOfFavorite extends StatelessWidget {
                   const CustomDetailsOfProduct(),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         SvgPicture.asset(Assets.imagesFavoriteList),
                         const Spacer(),
                         Container(
-                          height: 35,
-                          width: 100,
+                          height: MediaQuery.sizeOf(context).height * .025,
+                          width: MediaQuery.sizeOf(context).width * .25,
                           decoration: BoxDecoration(
                             color: mainColor,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Center(
-                              child: Text(
-                            "Add to Cart",
-                            style: AppStyles.textMedium14(context)
-                                .copyWith(color: Colors.white),
+                              child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              "Add to Cart",
+                              style: AppStyles.textMedium14(context)
+                                  .copyWith(color: Colors.white),
+                            ),
                           )),
                         )
                       ],
@@ -64,4 +68,3 @@ class ListOfFavorite extends StatelessWidget {
     );
   }
 }
-
