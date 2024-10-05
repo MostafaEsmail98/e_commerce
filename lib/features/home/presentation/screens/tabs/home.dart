@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
             CustomCategoriesSection(),
             CustomSpaceHeight(height: .01),
             CustomApplianceSection(),
-            CustomSpaceHeight(height: .01),
+            CustomSpaceHeight(height: .015),
           ],
         ),
       ),

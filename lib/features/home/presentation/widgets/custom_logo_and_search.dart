@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/app_styles.dart';
 import '../../../../core/utils/k_colors.dart';
@@ -48,7 +48,11 @@ class CustomLogoAndSearch extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
-              child: SvgPicture.asset(Assets.imagesCart),
+              child: GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push("/Cart");
+                  },
+                  child: SvgPicture.asset(Assets.imagesCart)),
             )
           ],
         ),
