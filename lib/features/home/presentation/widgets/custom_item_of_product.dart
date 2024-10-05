@@ -6,6 +6,7 @@ import '../../../../core/utils/custom_space_width.dart';
 import '../../../../core/utils/k_colors.dart';
 import '../../../../generated/assets.dart';
 import 'custom_details_of_product.dart';
+import 'custom_number_of_product.dart';
 
 class CustomItemOfProduct extends StatelessWidget {
   const CustomItemOfProduct({
@@ -35,7 +36,7 @@ class CustomItemOfProduct extends StatelessWidget {
               const Spacer(),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -50,27 +51,14 @@ class CustomItemOfProduct extends StatelessWidget {
                           child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 8),
                           child: Text(
                             "Add to Cart",
                             style: AppStyles.textMedium14(context)
                                 .copyWith(color: Colors.white),
                           ),
                         ),
-                      )):Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SvgPicture.asset(Assets.imagesMinus),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Text("1",style: AppStyles.textMedium18(context).copyWith(color: Colors.white),),
-                            ),
-                            SvgPicture.asset(Assets.imagesPlus),
-                          ],
-                        ),
-                      ),
+                      )):const CustomNumberOfProduct(),
                     )
                   ],
                 ),
@@ -82,3 +70,4 @@ class CustomItemOfProduct extends StatelessWidget {
     );
   }
 }
+

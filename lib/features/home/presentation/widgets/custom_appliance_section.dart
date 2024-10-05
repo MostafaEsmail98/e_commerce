@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 
 import '../../../../core/utils/app_styles.dart';
@@ -25,7 +26,11 @@ class CustomApplianceSection extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return const CustomProductItem();
+              return InkWell(
+                  onTap:  () {
+                    GoRouter.of(context).push('/ProductDetails');
+                  },
+                  child: const CustomProductItem());
             },
           ),
         )

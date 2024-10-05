@@ -1,6 +1,7 @@
 import 'package:e_commrece/features/home/presentation/widgets/custom_logo_and_search.dart';
 import 'package:e_commrece/features/home/presentation/widgets/custom_product_item.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductItems extends StatelessWidget {
   const ProductItems({super.key});
@@ -21,7 +22,11 @@ class ProductItems extends StatelessWidget {
                   mainAxisSpacing: 8,
                   crossAxisCount: 2),
               itemBuilder: (context, index) {
-                return const CustomProductItem();
+                return InkWell(
+                    onTap: () {
+                      GoRouter.of(context).push('/ProductDetails');
+                    },
+                    child: const CustomProductItem());
               },
             ))
           ],

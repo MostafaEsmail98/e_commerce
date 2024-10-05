@@ -5,6 +5,7 @@ import 'package:e_commrece/features/auth/presentation/screens/sign_up.dart';
 import 'package:e_commrece/features/auth/presentation/screens/verify_code.dart';
 import 'package:e_commrece/features/home/presentation/screens/cart_screen.dart';
 import 'package:e_commrece/features/home/presentation/screens/home_screen.dart';
+import 'package:e_commrece/features/home/presentation/screens/product_details_screen.dart';
 import 'package:e_commrece/features/home/presentation/screens/product_items.dart';
 import 'package:go_router/go_router.dart';
 
@@ -49,6 +50,10 @@ abstract class AppRouter {
     GoRoute(
       path: '/Cart',
       builder: (context, state) => const CartScreen(),
+    ),
+    GoRoute(
+      path: '/ProductDetails',
+      builder: (context, state) => const ProductDetailsScreen(),
     ),
   ]);
 }
