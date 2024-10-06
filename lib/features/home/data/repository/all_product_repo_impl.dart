@@ -1,0 +1,18 @@
+import 'package:dartz/dartz.dart';
+import 'package:e_commrece/core/errors/error_model.dart';
+import 'package:e_commrece/core/params/params.dart';
+import 'package:e_commrece/features/home/data/dataSource/remoteAllProduct/remote_all_product.dart';
+import 'package:e_commrece/features/home/domain/entity/all_product_entity.dart';
+import 'package:e_commrece/features/home/domain/repository/all_product_repo.dart';
+
+class AllProductRepoImpl extends AllProductRepo{
+  RemoteAllProduct remoteAllProduct;
+
+  AllProductRepoImpl({required this.remoteAllProduct});
+
+  @override
+  Future<Either<ErrorModel, AllProductEntity>> getAllProduct(BrandsParams params) {
+    return remoteAllProduct.getAllProduct(params);
+  }
+
+}

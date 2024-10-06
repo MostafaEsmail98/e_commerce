@@ -24,33 +24,31 @@ class CustomBrandsSection extends StatelessWidget {
           height: MediaQuery.sizeOf(context).height * .15,
           child: BlocBuilder<BrandsCubit, BrandsState>(
             builder: (context, state) {
-              return ListView.builder(
-                itemCount: (state is BrandsSuccessful)
-                    ? state.brandsEntity.data?.length??10:10,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                      onTap: () {
-                        GoRouter.of(context).push('/ProductDetails');
-                      },
-                      child: (state is BrandsSuccessful)
-                          ? CustomCategoriesItem(
-                              image:
-                                  state.brandsEntity.data![index].image ?? "",
-                              name: state.brandsEntity.data![index].name ?? "")
-                          : (state is BrandsFailure)
-                              ? const Center(
-                                  child: SizedBox(
-                                      width: 24, child: Icon(Icons.error)))
-                              : const SizedBox(
-                                width: 50,
-                                height: 24,
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ));
-                },
-              );
+              if (state is BrandsSuccessful) {
+                return ListView.builder(
+                  itemCount: state.brandsEntity.data?.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                        onTap: () {
+                          GoRouter.of(context).push('/ProductItems',
+                              extra: state.brandsEntity.data![index].id??"");
+                        },
+                        child: CustomCategoriesItem(
+                            image: state.brandsEntity.data![index].image ?? "",
+                            name: state.brandsEntity.data![index].name ?? ""));
+                  },
+                );
+              }
+              else if (state is BrandsFailure) {
+                return const Center(
+                    child: SizedBox(width: 24, child: Icon(Icons.error)));
+              } else {
+                return const SizedBox(
+                    width: 50,
+                    height: 24,
+                    child: Center(child: CircularProgressIndicator()));
+              }
             },
           ),
         )

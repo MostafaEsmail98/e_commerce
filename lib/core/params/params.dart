@@ -32,3 +32,8 @@ class ResetPasswordParams{
 
   ResetPasswordParams({required this.email, required this.newPassword});
 }
+class BrandsParams{
+  final String? id;
+
+  BrandsParams({required this.id});
+}

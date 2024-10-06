@@ -7,6 +7,7 @@ class Endpoints {
   static String resetPassword = "auth/resetPassword";
   static String categories = "categories";
   static String brands = "brands";
+  static String product = "products?brand=";
 }
 
 class ApiKey {
