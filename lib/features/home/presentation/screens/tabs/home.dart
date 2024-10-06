@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
             CustomCarouselSlider(),
             CustomCategoriesSection(),
             CustomSpaceHeight(height: .01),
-            CustomApplianceSection(),
+            CustomBrandsSection(),
             CustomSpaceHeight(height: .015),
           ],
         ),

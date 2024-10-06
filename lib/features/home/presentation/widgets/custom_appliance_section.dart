@@ -1,14 +1,13 @@
 
+import 'package:e_commrece/features/home/presentation/widgets/custom_categories_item.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 
 import '../../../../core/utils/app_styles.dart';
 
-import 'custom_product_item.dart';
-
-class CustomApplianceSection extends StatelessWidget {
-  const CustomApplianceSection({
+class CustomBrandsSection extends StatelessWidget {
+  const CustomBrandsSection({
     super.key,
   });
 
@@ -18,7 +17,7 @@ class CustomApplianceSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          "Home Appliance",
+          "Brands",
           style: AppStyles.textSemiBold24(context),
         ),
         SizedBox(
@@ -30,7 +29,7 @@ class CustomApplianceSection extends StatelessWidget {
                   onTap:  () {
                     GoRouter.of(context).push('/ProductDetails');
                   },
-                  child: const CustomProductItem());
+                  child: const CustomCategoriesItem(image: "", name: "name"));
             },
           ),
         )

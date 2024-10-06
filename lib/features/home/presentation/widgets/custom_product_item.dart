@@ -23,7 +23,6 @@ class CustomProductItem extends StatelessWidget {
               border: Border.all(color: mainColor),
               borderRadius: const BorderRadius.all(Radius.circular(16))),
           width: MediaQuery.sizeOf(context).width * .6,
-          
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
