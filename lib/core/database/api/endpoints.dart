@@ -6,6 +6,7 @@ class Endpoints {
   static String verifyCode = "auth/verifyResetCode";
   static String resetPassword = "auth/resetPassword";
   static String categories = "categories";
+  static String brands = "brands";
 }
 
 class ApiKey {

@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -22,17 +21,17 @@ class CustomCategoriesItem extends StatelessWidget {
       children: [
         Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                radius: 50,
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: image,
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-              ),
-            )),
+          borderRadius: BorderRadius.circular(50),
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 50,
+            child: CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: image,
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
+          ),
+        )),
         const SizedBox(
           height: 1,
         ),

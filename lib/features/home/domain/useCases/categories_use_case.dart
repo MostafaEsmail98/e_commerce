@@ -8,7 +8,7 @@ class CategoriesUseCase {
 
   CategoriesUseCase({required this.categoriesRepo});
 
-  Future<Either<ErrorModel,CategoriesEntity>> call(){
-    return categoriesRepo.getAllCategories();
+  Future<Either<ErrorModel,CategoriesEntity>> call()async {
+    return await categoriesRepo.getAllCategories();
   }
 }

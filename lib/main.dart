@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc_observer.dart';
 import 'features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
+import 'features/home/presentation/manager/brands_cubit/brands_cubit.dart';
 
 void main() {
   runApp(DevicePreview(builder: (BuildContext context) =>const MyApp(),
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       BlocProvider<ForgetPasswordCubit>(create: (context) => ForgetPasswordCubit(),),
       BlocProvider<VerifyCodeCubit>(create: (context) => VerifyCodeCubit(),),
       BlocProvider<CategoriesCubit>(create: (context) => CategoriesCubit()..getAllCategories(),),
+      BlocProvider<BrandsCubit>(create: (context) => BrandsCubit()..getBrands(),),
     ], child:  SafeArea(
       child: MaterialApp.router(
         locale: DevicePreview.locale(context),
