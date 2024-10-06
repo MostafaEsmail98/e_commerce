@@ -1,7 +1,8 @@
+import 'package:e_commrece/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/app_styles.dart';
-import '../../../../generated/assets.dart';
+import 'custom_categories_item.dart';
 
 class CustomCategoriesSection extends StatelessWidget {
   const CustomCategoriesSection({
@@ -18,43 +19,36 @@ class CustomCategoriesSection extends StatelessWidget {
               "Categories",
               style: AppStyles.textSemiBold24(context),
             ),
-            const Spacer(),
-            Text(
-              "view all",
-              style: AppStyles.textRegular14(context),
-            )
           ],
         ),
         SizedBox(
-          height: MediaQuery.sizeOf(context).height*.3,
-          child: GridView.builder(
-            scrollDirection: Axis.horizontal,
-            gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 3),
-            itemBuilder: (context, index) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(Assets.imagesCat))),
-                    ),
-                  ),
-                  const SizedBox(height: 1,),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      "Women's fashion",
-                      maxLines: 2,
-                      style: AppStyles.textRegular14(context),
-                    ),
-                  ),
-                ],
+          height: MediaQuery.sizeOf(context).height * .3,
+          child: BlocBuilder<CategoriesCubit, CategoriesState>(
+            builder: (context, state) {
+              return GridView.builder(
+                itemCount: (state is CategoriesSuccessful)
+                    ? state.categoriesEntity.data!.length
+                    : 10,
+                scrollDirection: Axis.horizontal,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, crossAxisSpacing: 5, mainAxisSpacing: 3),
+                itemBuilder: (context, index) {
+                  return (state is CategoriesSuccessful)
+                      ? CustomCategoriesItem(
+                          image:
+                              state.categoriesEntity.data![index].image ?? "",
+                          name: state.categoriesEntity.data![index].name ?? "",
+                        )
+                      : (state is CategoriesFailure)
+                          ? const Center(
+                              child:
+                                  SizedBox(width: 24, child: Icon(Icons.error)))
+                          : const Center(
+                              child: SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator()));
+                },
               );
             },
           ),

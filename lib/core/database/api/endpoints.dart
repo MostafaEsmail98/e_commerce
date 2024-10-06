@@ -5,6 +5,7 @@ class Endpoints {
   static String forgetPassword = "auth/forgotPasswords";
   static String verifyCode = "auth/verifyResetCode";
   static String resetPassword = "auth/resetPassword";
+  static String categories = "categories";
 }
 
 class ApiKey {
@@ -16,4 +17,15 @@ static String message =  "message";
 static String role =  "role";
 static String statusMsg =  "statusMsg";
 static String status =  "status";
+static String id =  "_id";
+static String slug =  "slug";
+static String createdAt =  "createdAt";
+static String updatedAt =  "updatedAt";
+static String data =  'data';
+static String image =  "image";
+static String metadata =  "metadata";
+static String currentPage =  "currentPage";
+static String numberOfPages =  "numberOfPages";
+static String limit =  "limit";
+static String results =  "results";
 }

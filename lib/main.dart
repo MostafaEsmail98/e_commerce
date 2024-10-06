@@ -4,6 +4,7 @@ import 'package:e_commrece/features/auth/presentation/manager/forget_password_cu
 import 'package:e_commrece/features/auth/presentation/manager/reset_password/reset_password_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/manager/verify_code_cubit/verify_code_cubit.dart';
+import 'package:e_commrece/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
       BlocProvider<SignUpCubit>(create: (context) => SignUpCubit(),),
       BlocProvider<ForgetPasswordCubit>(create: (context) => ForgetPasswordCubit(),),
       BlocProvider<VerifyCodeCubit>(create: (context) => VerifyCodeCubit(),),
+      BlocProvider<CategoriesCubit>(create: (context) => CategoriesCubit()..getAllCategories(),),
     ], child:  SafeArea(
       child: MaterialApp.router(
         locale: DevicePreview.locale(context),
