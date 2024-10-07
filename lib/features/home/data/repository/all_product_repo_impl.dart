@@ -11,8 +11,8 @@ class AllProductRepoImpl extends AllProductRepo{
   AllProductRepoImpl({required this.remoteAllProduct});
 
   @override
-  Future<Either<ErrorModel, AllProductEntity>> getAllProduct(BrandsParams params) {
-    return remoteAllProduct.getAllProduct(params);
+  Future<Either<ErrorModel, AllProductEntity>> getAllProduct(BrandsParams params) async{
+    return await remoteAllProduct.getAllProduct(params);
   }
 
 }

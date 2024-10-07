@@ -8,6 +8,7 @@ class Endpoints {
   static String categories = "categories";
   static String brands = "brands";
   static String product = "products?brand=";
+  static String specificProduct = "products/";
 }
 
 class ApiKey {

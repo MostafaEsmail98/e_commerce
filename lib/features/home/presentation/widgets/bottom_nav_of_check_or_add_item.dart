@@ -5,9 +5,10 @@ import '../../../../core/utils/k_colors.dart';
 
 class BottomNavOfCheckOrAddItem extends StatelessWidget {
   const BottomNavOfCheckOrAddItem({
-    super.key, required this.title,
+    super.key, required this.title, required this.price,
   });
   final String title ;
+  final num price ;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class BottomNavOfCheckOrAddItem extends StatelessWidget {
                       .copyWith(color: const Color(0xff06004F)),
                 ),
                 Text(
-                  "EGP 3000",
+                  "EGP $price",
                   style: AppStyles.textMedium18(context),
                 )
               ],

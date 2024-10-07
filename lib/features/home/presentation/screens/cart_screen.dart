@@ -22,8 +22,10 @@ class CartScreen extends StatelessWidget {
           },
         ),
       ),
-      bottomNavigationBar: const BottomNavOfCheckOrAddItem(title: "Check Out",),
+      bottomNavigationBar: const BottomNavOfCheckOrAddItem(
+        title: "Check Out",
+        price: 0,
+      ),
     );
   }
 }
-

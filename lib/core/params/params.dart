@@ -36,4 +36,8 @@ class BrandsParams{
   final String? id;
 
   BrandsParams({required this.id});
+}class ProductParams{
+  final String? id;
+
+  ProductParams({required this.id});
 }
