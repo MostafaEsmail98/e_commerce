@@ -24,16 +24,17 @@ class ProductItems extends StatelessWidget {
                   return GridView.builder(
                     itemCount: state.allProductEntity.data!.length,
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 3 / 6.5,
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 3,
-                            crossAxisCount: 2),
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 3 / 6.5,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 3,
+                        crossAxisCount: 2),
                     itemBuilder: (context, index) {
                       return InkWell(
                           onTap: () {
                             GoRouter.of(context).push('/ProductDetails',
-                                extra: state.allProductEntity.data![index].id);
+                                extra: state.allProductEntity.data![index]
+                                    .id);
                           },
                           child: CustomProductItem(
                             dataEntity: state.allProductEntity.data![index],

@@ -45,4 +45,8 @@ class AllProductParams{
   final String? id;
 
   CategoriesTabParams({required this.id});
+}class PostWishlistParams{
+  final String? productId;
+
+  PostWishlistParams({required this.productId});
 }

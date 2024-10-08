@@ -1,4 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commrece/core/params/params.dart';
+import 'package:e_commrece/features/home/domain/entity/get_wishlist_entity.dart';
+import 'package:e_commrece/features/home/presentation/manager/get_wishlist_cubit/get_wishlist_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/utils/app_styles.dart';
@@ -9,12 +14,13 @@ import 'custom_details_of_product.dart';
 import 'custom_number_of_product.dart';
 
 class CustomItemOfProduct extends StatelessWidget {
-  const CustomItemOfProduct({
-    super.key,
-    required this.type,
-  });
+  const CustomItemOfProduct(
+      {super.key, required this.type, this.getWishlistEntity, this.index});
 
   final bool type;
+  final int? index;
+
+  final GetWishlistEntity? getWishlistEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +36,15 @@ class CustomItemOfProduct extends StatelessWidget {
             children: [
               ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: Image.asset(Assets.imagesSubcat)),
+                  child: CachedNetworkImage(
+                      imageUrl:
+                          getWishlistEntity?.data?[index ?? 0].imageCover ??
+                              "")),
               const CustomSpaceWidth(width: .03),
-              const CustomDetailsOfProduct(),
+              CustomDetailsOfProduct(
+                  type: true,
+                  getWishlistEntity: getWishlistEntity,
+                  index: index),
               const Spacer(),
               Padding(
                 padding:
@@ -40,25 +52,33 @@ class CustomItemOfProduct extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    type==true?SvgPicture.asset(Assets.imagesFavoriteList):SvgPicture.asset(Assets.imagesDelete),
+                    InkWell(
+                        onTap: () {
+                          context.read<GetWishlistCubit>().deleteWishlist(
+                              PostWishlistParams(productId: getWishlistEntity!.data?[index ?? 0].id));
+                        },
+                        child: SvgPicture.asset(Assets.imagesDelete)),
                     const Spacer(),
                     Container(
                       decoration: BoxDecoration(
                         color: mainColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: type==true?Center(
-                          child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 8),
-                          child: Text(
-                            "Add to Cart",
-                            style: AppStyles.textMedium14(context)
-                                .copyWith(color: Colors.white),
-                          ),
-                        ),
-                      )):const CustomNumberOfProduct(),
+                      child: type == true
+                          ? Center(
+                              child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5.0, horizontal: 8),
+                                child: Text(
+                                  "Add to Cart",
+                                  style: AppStyles.textMedium14(context)
+                                      .copyWith(color: Colors.white),
+                                ),
+                              ),
+                            ))
+                          : const CustomNumberOfProduct(),
                     )
                   ],
                 ),
@@ -70,4 +90,3 @@ class CustomItemOfProduct extends StatelessWidget {
     );
   }
 }
-

@@ -25,6 +25,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     children: [
                       CustomCarouselOfProduct(
                         images: state.specificProductEntity.data!.images!,
+                        id: state.specificProductEntity.data!.id!,
                       ),
                       const CustomSpaceHeight(height: .02),
                       CustomDetailsOfItem(

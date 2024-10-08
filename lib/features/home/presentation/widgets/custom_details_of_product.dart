@@ -1,3 +1,4 @@
+import 'package:e_commrece/features/home/domain/entity/get_wishlist_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_styles.dart';
@@ -6,8 +7,11 @@ import '../../../../core/utils/custom_space_width.dart';
 
 class CustomDetailsOfProduct extends StatelessWidget {
   const CustomDetailsOfProduct({
-    super.key,
+    super.key, required this.type,this.getWishlistEntity,  this.index
   });
+  final bool type;
+  final GetWishlistEntity? getWishlistEntity;
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +19,16 @@ class CustomDetailsOfProduct extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const CustomSpaceHeight(height: .01),
-        Text(
-          "Nike Air Jordon",
-          style: AppStyles.textMedium18(context),
+        SizedBox(
+          width: MediaQuery.sizeOf(context).width*.35,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Text(
+              overflow: TextOverflow.ellipsis,
+              type==true?getWishlistEntity?.data![index??0].title??"":"",
+              style: AppStyles.textMedium18(context),
+            ),
+          ),
         ),
         const CustomSpaceHeight(height: .005),
         Row(
@@ -40,7 +51,7 @@ class CustomDetailsOfProduct extends StatelessWidget {
         Row(
           children: [
             Text(
-              "EGP 600",
+              "EGP ${type==true?getWishlistEntity?.data![index??0].price??"":""}",
               style: AppStyles.textMedium18(context),
             ),
             const CustomSpaceWidth(width: .02),

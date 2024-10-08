@@ -11,6 +11,7 @@ class Endpoints {
   static String productOfCategory = "products?category[in]=";
   static String specificProduct = "products/";
   static String categoriesTab = "products?category[in]=";
+  static String wishlist = "wishlist";
 }
 
 class ApiKey {
@@ -33,4 +34,5 @@ static String currentPage =  "currentPage";
 static String numberOfPages =  "numberOfPages";
 static String limit =  "limit";
 static String results =  "results";
+static String productId =  "productId";
 }
