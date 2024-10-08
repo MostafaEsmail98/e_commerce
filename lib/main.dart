@@ -8,12 +8,16 @@ import 'package:e_commrece/features/home/presentation/manager/categories_cubit/c
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
 
 import 'bloc_observer.dart';
+import 'core/database/cache/cache_helper.dart';
 import 'features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import 'features/home/presentation/manager/brands_cubit/brands_cubit.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox(CacheHelper.myBox);
   runApp(DevicePreview(builder: (BuildContext context) =>const MyApp(),
   enabled: !kReleaseMode,
    ));
