@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:e_commrece/core/errors/exceptions.dart';
 
-import '../../../../../core/errors/error_model.dart';
 import '../../models/categories_model.dart';
 
 abstract class RemoteAllCategories {
@@ -8,5 +8,5 @@ abstract class RemoteAllCategories {
 
 
 
-  Future<Either<ErrorModel, CategoriesModel>> getAllCategories() ;
+  Future<Either<Failure, CategoriesModel>> getAllCategories() ;
 }

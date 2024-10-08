@@ -29,7 +29,7 @@ class ForgetPassword extends StatelessWidget {
                       style: const TextStyle(color: Colors.black),
                     )
                   : state is ForgetPasswordFailure
-                      ? Text(state.errorModel.errMassage,
+                      ? Text(state.errorModel,
                           style: const TextStyle(color: Colors.black))
                       : const Text("Loading",style:TextStyle(color: Colors.black)),
             ),

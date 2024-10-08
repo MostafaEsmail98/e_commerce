@@ -32,7 +32,7 @@ class CustomButton extends StatelessWidget {
               } else if (state is SignInFailure) {
                 return Center(
                   child: Text(
-                    state.failure.errMassage,
+                    state.failure,
                     style: AppStyles.textSemiBold18(context)
                         .copyWith(color: Colors.red),
                   ),

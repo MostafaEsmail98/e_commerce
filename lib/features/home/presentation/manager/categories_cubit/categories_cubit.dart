@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commrece/core/database/api/dio_consumer.dart';
-import 'package:e_commrece/core/errors/error_model.dart';
 import 'package:e_commrece/features/home/data/dataSource/remoteAllCategories/remote_all_categories_impl.dart';
 import 'package:e_commrece/features/home/data/repository/categories_repo_impl.dart';
 import 'package:e_commrece/features/home/domain/entity/categories_entity.dart';
@@ -20,7 +19,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
                 remoteAllCategories:
                     RemoteAllCategoriesImpl(api: DioConsumer(dio: Dio()))))
         .call();
-    response.fold((failure) => emit(CategoriesFailure(failure)),
+    response.fold((failure) => emit(CategoriesFailure(failure.message)),
         (result) => emit(CategoriesSuccessful(result)));
   }
 }

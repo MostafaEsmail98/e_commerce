@@ -6,7 +6,6 @@ import 'package:e_commrece/features/auth/data/dataSoures/remoteDataSignUp/remote
 import 'package:e_commrece/features/auth/data/repositery/sign_up_repo_impl.dart';
 import 'package:e_commrece/features/auth/domain/usesCase/sign_up_use_cases.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/errors/error_model.dart';
 import '../../../domain/entities/sign_up_entity.dart';
 
 part 'sign_up_state.dart';
@@ -33,7 +32,7 @@ class SignUpCubit extends Cubit<SignUpState> {
                 mobil: mobilController.text,
                 email: emailController.text,
                 password: passwordController.text));
-    response.fold((failure) => emit(SignUpFailure(failure)),
+    response.fold((failure) => emit(SignUpFailure(failure.message)),
         (user) => emit(SignUpSuccessful(user)));
   }
 }

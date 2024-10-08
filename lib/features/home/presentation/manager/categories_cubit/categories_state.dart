@@ -10,7 +10,7 @@ final class CategoriesSuccessful extends CategoriesState {
   CategoriesSuccessful(this.categoriesEntity);
 }
 final class CategoriesFailure extends CategoriesState {
-  ErrorModel errorModel ;
+  String errorModel ;
 
   CategoriesFailure(this.errorModel);
 }

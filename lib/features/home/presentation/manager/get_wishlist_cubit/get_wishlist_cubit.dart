@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commrece/core/database/api/dio_consumer.dart';
-import 'package:e_commrece/core/errors/error_model.dart';
 import 'package:e_commrece/core/params/params.dart';
 import 'package:e_commrece/features/home/data/dataSource/remoteGetWishlist/remote_get_wishlist_impl.dart';
 import 'package:e_commrece/features/home/data/models/post_wishlist_model.dart';
@@ -23,7 +22,7 @@ class GetWishlistCubit extends Cubit<GetWishlistState> {
                 remoteGetWishlist:
                     RemoteGetWishlistImpl(api: DioConsumer(dio: Dio()))))
         .call();
-    response.fold((failure) => emit(GetWishlistFailure(failure)),
+    response.fold((failure) => emit(GetWishlistFailure(failure.message)),
         (result) => emit(GetWishlistSuccessful(result)));
   }
 
@@ -34,7 +33,7 @@ class GetWishlistCubit extends Cubit<GetWishlistState> {
                 remoteGetWishlist:
                     RemoteGetWishlistImpl(api: DioConsumer(dio: Dio()))))
         .postCall(params);
-    response.fold((failure) => emit(PostWishlistFailure(failure)),
+    response.fold((failure) => emit(PostWishlistFailure(failure.message)),
         (result) => emit(PostWishlistSuccessful(result)));
   }
 
@@ -46,7 +45,7 @@ class GetWishlistCubit extends Cubit<GetWishlistState> {
                     RemoteGetWishlistImpl(api: DioConsumer(dio: Dio()))))
         .deleteCall(params);
     getWishlist();
-    response.fold((failure) => emit(DeleteWishlistFailure(failure)),
+    response.fold((failure) => emit(DeleteWishlistFailure(failure.message)),
         (result) => emit(DeleteWishlistSuccessful(result)));
   }
 }

@@ -10,7 +10,7 @@ final class CategoriesTabSuccessful extends CategoriesTabState {
    CategoriesTabSuccessful(this.categoriesTabEntity);
 }
 final class CategoriesTabFailure extends CategoriesTabState {
-   ErrorModel errorModel ;
+   String errorModel ;
 
    CategoriesTabFailure(this.errorModel);
 }

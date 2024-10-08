@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commrece/core/database/api/dio_consumer.dart';
-import 'package:e_commrece/core/errors/error_model.dart';
 import 'package:e_commrece/core/params/params.dart';
 import 'package:e_commrece/features/home/data/dataSource/remoteAllProduct/remote_all_product_impl.dart';
 import 'package:e_commrece/features/home/data/repository/all_product_repo_impl.dart';
@@ -17,7 +16,7 @@ class AllProductCubit extends Cubit<AllProductState> {
     emit(AllProductLoading());
     var response =await AllProductUseCase(allProductRepo: AllProductRepoImpl(
         remoteAllProduct: RemoteAllProductImpl(api: DioConsumer(dio: Dio())))).call(params);
-    response.fold((failure) => emit(AllProductFailure(failure)),
+    response.fold((failure) => emit(AllProductFailure(failure.message)),
             (result) => emit(AllProductSuccessful(result)));
   }
 

@@ -24,7 +24,7 @@ class SignInCubit extends Cubit<SignInState> {
             params: SignInParams(
                 email: emailController.text,
                 password: passwordController.text));
-    response.fold((failure) => emit(SignInFailure(failure)), (user) {
+    response.fold((failure) => emit(SignInFailure(failure.message)), (user) {
       emit(SignInSuccessful(user));
     });
   }

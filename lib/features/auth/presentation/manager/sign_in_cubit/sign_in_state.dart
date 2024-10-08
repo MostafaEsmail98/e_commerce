@@ -1,4 +1,3 @@
-import 'package:e_commrece/core/errors/error_model.dart';
 import 'package:e_commrece/features/auth/domain/entities/sign_in_entity.dart';
 
 class SignInState {}
@@ -13,7 +12,7 @@ final class SignInSuccessful extends SignInState {
 }
 
 final class SignInFailure extends SignInState {
-  ErrorModel failure;
+  String failure;
 
   SignInFailure(this.failure);
 }

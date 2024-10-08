@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commrece/core/database/api/dio_consumer.dart';
-import 'package:e_commrece/core/errors/error_model.dart';
 import 'package:e_commrece/features/home/data/dataSource/remoteBrands/remote_brands_impl.dart';
 import 'package:e_commrece/features/home/data/repository/brands_repo_impl.dart';
 import 'package:e_commrece/features/home/domain/entity/brands_entity.dart';
@@ -18,7 +17,7 @@ class BrandsCubit extends Cubit<BrandsState> {
             brandsRepo: BrandsRepoImpl(
                 remoteBrands: RemoteBrandsImpl(api: DioConsumer(dio: Dio()))))
         .call();
-    response.fold((failure) => emit(BrandsFailure(failure)),
+    response.fold((failure) => emit(BrandsFailure(failure.message)),
         (result) => emit(BrandsSuccessful(result)));
   }
 }

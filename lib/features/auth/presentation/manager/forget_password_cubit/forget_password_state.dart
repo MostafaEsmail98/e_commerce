@@ -13,7 +13,7 @@ final class ForgetPasswordSuccessful extends ForgetPasswordState {
 }
 
 final class ForgetPasswordFailure extends ForgetPasswordState {
-  ErrorModel errorModel;
+  String errorModel;
 
   ForgetPasswordFailure(this.errorModel);
 }

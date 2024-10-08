@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commrece/core/database/api/dio_consumer.dart';
-import 'package:e_commrece/core/errors/error_model.dart';
 import 'package:e_commrece/core/params/params.dart';
 import 'package:e_commrece/features/auth/data/dataSoures/remoteDataResetPassword/remote_reset_password_impl.dart';
 import 'package:e_commrece/features/auth/data/repositery/reset_password_repo_impl.dart';
@@ -25,7 +24,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
                 api: DioConsumer(dio: Dio())))).call(
         ResetPasswordParams(email:emailController.text, newPassword:newPasswordController.text));
     response.fold((failure) =>
-        emit(ResetPasswordFailure(errorModel: failure)), (user) =>
+        emit(ResetPasswordFailure(errorModel: failure.message)), (user) =>
         emit(ResetPasswordSuccessful(resetPasswordEntity: user)));
   }
 }

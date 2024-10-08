@@ -13,7 +13,7 @@ final class GetWishlistSuccessful extends GetWishlistState {
 }
 
 final class GetWishlistFailure extends GetWishlistState {
-  ErrorModel errorModel;
+  String errorModel;
 
   GetWishlistFailure(this.errorModel);
 }
@@ -28,7 +28,7 @@ final class PostWishlistSuccessful extends GetWishlistState {
 }
 
 final class PostWishlistFailure extends GetWishlistState {
-  ErrorModel errorModel ;
+  String errorModel ;
 
   PostWishlistFailure(this.errorModel);
 }final class DeleteWishlistLoading extends GetWishlistState {}
@@ -41,7 +41,7 @@ final class DeleteWishlistSuccessful extends GetWishlistState {
 }
 
 final class DeleteWishlistFailure extends GetWishlistState {
-  ErrorModel errorModel ;
+  String errorModel ;
 
   DeleteWishlistFailure(this.errorModel);
 }

@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_commrece/core/errors/error_model.dart';
+import 'package:e_commrece/core/errors/exceptions.dart';
 import 'package:e_commrece/core/params/params.dart';
 import 'package:e_commrece/features/auth/data/dataSoures/remoteDataForgetPassword/remote_forget_password.dart';
 import 'package:e_commrece/features/auth/domain/entities/forget_password_entity.dart';
@@ -12,7 +12,7 @@ class ForgetPasswordRepoImpl extends ForgetPasswordRepo {
   ForgetPasswordRepoImpl({required this.remoteForgetPassword});
 
   @override
-  Future<Either<ErrorModel, ForgetPasswordEntity>> postForgetPasswordUser(
+  Future<Either<Failure, ForgetPasswordEntity>> postForgetPasswordUser(
       {required ForgetPasswordParams params}) async {
     return await remoteForgetPassword.postForgetPasswordUser(params: params);
   }

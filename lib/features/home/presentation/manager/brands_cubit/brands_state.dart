@@ -13,7 +13,7 @@ final class BrandsSuccessful extends BrandsState {
 }
 
 final class BrandsFailure extends BrandsState {
-  ErrorModel errorModel;
+  String errorModel;
 
   BrandsFailure(this.errorModel);
 }

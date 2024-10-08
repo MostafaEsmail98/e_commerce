@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commrece/core/database/api/dio_consumer.dart';
-import 'package:e_commrece/core/errors/error_model.dart';
 import 'package:e_commrece/core/params/params.dart';
 import 'package:e_commrece/features/auth/data/dataSoures/remoteDataForgetPassword/remote_forget_password_impl.dart';
 import 'package:e_commrece/features/auth/data/repositery/forget_password_repo_impl.dart';
@@ -24,7 +23,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
                     RemoteForgetPasswordImpl(api: DioConsumer(dio: Dio()))))
         .call(params: ForgetPasswordParams(email: emailController.text));
     response.fold(
-      (failure) => emit(ForgetPasswordFailure(failure)),
+      (failure) => emit(ForgetPasswordFailure(failure.message)),
       (user) => emit(ForgetPasswordSuccessful(user)),
     );
   }

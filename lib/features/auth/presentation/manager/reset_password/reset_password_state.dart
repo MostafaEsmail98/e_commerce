@@ -3,7 +3,7 @@ class ResetPasswordState {}
 
 final class ResetPasswordInitial extends ResetPasswordState {}
 final class ResetPasswordFailure extends ResetPasswordState {
-  ErrorModel errorModel ;
+  String errorModel ;
 
   ResetPasswordFailure({required this.errorModel});
 }

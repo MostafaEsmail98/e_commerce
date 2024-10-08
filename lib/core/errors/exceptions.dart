@@ -1,53 +1,56 @@
 import 'package:dio/dio.dart';
 
-import 'error_model.dart';
+abstract class Failure {
+  String message;
+  String? statusCode;
 
-
-class ServerExceptions implements Exception {
-ErrorModel errorModel ;
-
-ServerExceptions({required this.errorModel});
-
+  Failure(this.message, {this.statusCode});
 }
-void handleDioExceptions(DioException e){
-  switch(e.type){
-    case DioExceptionType.connectionTimeout:
-      throw ServerExceptions(errorModel: ErrorModel.fromJson(e.response!.data));
-    case DioExceptionType.sendTimeout:
-      throw ServerExceptions(errorModel: ErrorModel.fromJson(e.response!.data));
-    case DioExceptionType.receiveTimeout:
-      throw ServerExceptions(errorModel: ErrorModel.fromJson(e.response!.data));
-    case DioExceptionType.badCertificate:
-      throw ServerExceptions(errorModel: ErrorModel.fromJson(e.response!.data));
-    case DioExceptionType.cancel:
-      throw ServerExceptions(errorModel: ErrorModel.fromJson(e.response!.data));
-    case DioExceptionType.connectionError:
-      throw ServerExceptions(errorModel: ErrorModel.fromJson(e.response!.data));
-    case DioExceptionType.unknown:
-      throw ServerExceptions(errorModel: ErrorModel.fromJson(e.response!.data));
-    case DioExceptionType.badResponse:
-      switch (e.response?.statusCode) {
-        case 400: // Bad request
-          throw ServerExceptions(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 401: //unauthorized
-          throw ServerExceptions(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 403: //forbidden
-          throw ServerExceptions(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 404: //not found
-          throw ServerExceptions(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 409: //coefficient
-          throw ServerExceptions(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 422: //  Unprocessable Entity
-          throw ServerExceptions(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 504: // Server exception
-          throw ServerExceptions(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-      }
+
+class ServerFailure extends Failure {
+  ServerFailure(super.message, {super.statusCode});
+
+  factory ServerFailure.fromServer(DioException dioException) {
+    switch (dioException.type) {
+      case DioExceptionType.connectionTimeout:
+        return ServerFailure("connection Timeout");
+      case DioExceptionType.sendTimeout:
+        return ServerFailure("send Timeout");
+      case DioExceptionType.receiveTimeout:
+        return ServerFailure("recive Timeout");
+      case DioExceptionType.badCertificate:
+        return ServerFailure("connection Timeout");
+      case DioExceptionType.badResponse:
+        return ServerFailure.fromBadResponse(
+            dioException.response!.statusCode!, dioException.response!.data);
+      case DioExceptionType.cancel:
+        return ServerFailure("request to server is canceled");
+      case DioExceptionType.connectionError:
+        return ServerFailure("connection Timeout");
+      case DioExceptionType.unknown:
+        if (dioException.message!.contains("SocketException")) {
+          return ServerFailure("error in internet");
+        } else {
+          return ServerFailure("opps there something went wrong");
+        }
+      default:
+        return ServerFailure("opps there something went wrong");
+    }
+  }
+
+  factory ServerFailure.fromBadResponse(int statusCode, dynamic response) {
+    if (statusCode == 400 || statusCode == 401 || statusCode == 402) {
+      return ServerFailure(response["message"],
+          statusCode: statusCode.toString());
+    } else if (statusCode == 404) {
+      return ServerFailure(" not found data ",
+          statusCode: statusCode.toString());
+    } else if (statusCode == 500) {
+      return ServerFailure(response["message"],
+          statusCode: statusCode.toString());
+    } else {
+      return ServerFailure("opps try again latter",
+          statusCode: statusCode.toString());
+    }
   }
 }

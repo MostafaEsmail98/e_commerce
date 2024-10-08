@@ -19,7 +19,7 @@ abstract class AppRouter {
   static final routes = GoRouter(routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const Splash(),
+      builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
       path: '/SignIn',

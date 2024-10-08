@@ -88,7 +88,7 @@ class ResetPassword extends StatelessWidget {
                           style: AppStyles.textSemiBold18(context),
                         );
                       } else if (state is ResetPasswordFailure) {
-                        return Text(state.errorModel.errMassage,
+                        return Text(state.errorModel,
                             style: AppStyles.textSemiBold18(context));
                       }
                       return Text(

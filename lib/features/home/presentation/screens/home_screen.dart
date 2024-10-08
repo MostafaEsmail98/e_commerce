@@ -49,13 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
               SnackBar(content: Text(state.postWishlistModel.message!)));
         } else if (state is PostWishlistFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorModel.errMassage)));
+              SnackBar(content: Text(state.errorModel)));
         } else if (state is DeleteWishlistSuccessful) {
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.deleteWishlistModel.message!)));
         }else if (state is DeleteWishlistFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorModel.errMassage)));
+              SnackBar(content: Text(state.errorModel)));
         }
       },
       child: Scaffold(

@@ -10,6 +10,6 @@ final class SignUpSuccessful extends SignUpState {
   SignUpSuccessful(this.signInEntity);
 }
 final class SignUpFailure extends SignUpState {
-  ErrorModel failure;
+  String failure;
   SignUpFailure(this.failure);
 }

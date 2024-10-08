@@ -147,7 +147,7 @@ class SignUp extends StatelessWidget {
                               style: AppStyles.textSemiBold18(context),);
                           }
                           else if (state is SignUpFailure) {
-                            return Text(state.failure.errMassage,
+                            return Text(state.failure,
                                 style: AppStyles.textSemiBold18(context));
                           }
                           return Text(

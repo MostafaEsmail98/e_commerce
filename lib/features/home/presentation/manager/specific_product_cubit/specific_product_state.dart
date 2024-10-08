@@ -13,7 +13,7 @@ final class SpecificProductSuccessful extends SpecificProductState {
 }
 
 final class SpecificProductFailure extends SpecificProductState {
-  ErrorModel errorModel;
+  String errorModel;
 
   SpecificProductFailure(this.errorModel);
 }

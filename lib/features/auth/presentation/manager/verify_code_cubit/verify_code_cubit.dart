@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commrece/core/database/api/dio_consumer.dart';
-import 'package:e_commrece/core/errors/error_model.dart';
 import 'package:e_commrece/core/params/params.dart';
 import 'package:e_commrece/features/auth/data/dataSoures/remoteDataVerifyCode/remote_verify_code_impl.dart';
 import 'package:e_commrece/features/auth/data/repositery/verify_code_repo_impl.dart';
@@ -26,7 +25,7 @@ class VerifyCodeCubit extends Cubit<VerifyCodeState> {
                     RemoteVerifyCodeImpl(api: DioConsumer(dio: Dio()))))
         .call(params: VerifyCodeParams(resetCode: codeController.text));
     response.fold(
-      (failure) => emit(VerifyCodeFailure(failure)),
+      (failure) => emit(VerifyCodeFailure(failure.message)),
       (code) => emit(VerifyCodeSuccessful(code)),
     );
   }

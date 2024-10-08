@@ -4,7 +4,7 @@ class VerifyCodeState {}
 
 final class VerifyCodeInitial extends VerifyCodeState {}
 final class VerifyCodeFailure extends VerifyCodeState {
-  ErrorModel errorModel ;
+  String errorModel ;
 
   VerifyCodeFailure(this.errorModel);
 }

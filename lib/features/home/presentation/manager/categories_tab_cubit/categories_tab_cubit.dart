@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commrece/core/database/api/dio_consumer.dart';
-import 'package:e_commrece/core/errors/error_model.dart';
 import 'package:e_commrece/core/params/params.dart';
 import 'package:e_commrece/features/home/data/dataSource/remoteCategoriesTab/remote_categories_tab_impl.dart';
 import 'package:e_commrece/features/home/data/repository/categories_tab_repo_impl.dart';
@@ -20,7 +19,7 @@ class CategoriesTabCubit extends Cubit<CategoriesTabState> {
         categoriesTabRepo: CategoriesTabRepoImpl(
             remoteCategoriesTab: RemoteCategoriesTabImpl(
                 api: DioConsumer(dio: Dio())))).call(params);
-    response.fold((failure) => emit(CategoriesTabFailure(failure)), (result) =>
+    response.fold((failure) => emit(CategoriesTabFailure(failure.message)), (result) =>
         emit(CategoriesTabSuccessful(result)));
   }
 }
