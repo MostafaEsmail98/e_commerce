@@ -48,10 +48,10 @@ abstract class AppRouter {
     GoRoute(
         path: '/ProductItems',
         builder: (context, state) {
-          var res = state.extra as String?;
+          var res = state.extra as CheckApi?;
           return BlocProvider(
             create: (context) =>
-                AllProductCubit()..getAllProduct(BrandsParams(id: res)),
+                AllProductCubit()..getAllProduct(AllProductParams(id: res?.res,check: res?.check)),
             child: const ProductItems(),
           );
         }),
@@ -71,4 +71,10 @@ abstract class AppRouter {
       },
     ),
   ]);
+}
+class CheckApi{
+   String? res;
+   bool? check ;
+
+   CheckApi({this.res, this.check});
 }

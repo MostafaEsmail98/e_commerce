@@ -14,13 +14,24 @@ class RemoteAllProductImpl extends RemoteAllProduct{
   RemoteAllProductImpl({required this.api});
 
   @override
-  Future<Either<ErrorModel, AllProductModel>> getAllProduct(BrandsParams params) async{
-    try {
-      var response =await  api.get(Endpoints.product+params.id!);
-      return Right(AllProductModel.fromJson(response));
-    } on ServerExceptions catch (e) {
-      return Left(ErrorModel(errMassage: e.errorModel.errMassage));
+  Future<Either<ErrorModel, AllProductModel>> getAllProduct(AllProductParams params) async{
+    if (params.check==true){
+      try {
+        var response =await  api.get(Endpoints.product+params.id!);
+        return Right(AllProductModel.fromJson(response));
+      } on ServerExceptions catch (e) {
+        return Left(ErrorModel(errMassage: e.errorModel.errMassage));
+      }
     }
+    else {
+      try {
+        var response =await  api.get(Endpoints.productOfCategory+params.id!);
+        return Right(AllProductModel.fromJson(response));
+      } on ServerExceptions catch (e) {
+        return Left(ErrorModel(errMassage: e.errorModel.errMassage));
+      }
+    }
+
   }
   
 }

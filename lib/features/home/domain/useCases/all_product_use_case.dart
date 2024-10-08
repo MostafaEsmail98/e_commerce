@@ -9,7 +9,7 @@ class AllProductUseCase {
 
   AllProductUseCase({required this.allProductRepo});
 
-  Future<Either<ErrorModel,AllProductEntity>>call (BrandsParams params){
+  Future<Either<ErrorModel,AllProductEntity>>call (AllProductParams params){
     return allProductRepo.getAllProduct(params);
   }
 }

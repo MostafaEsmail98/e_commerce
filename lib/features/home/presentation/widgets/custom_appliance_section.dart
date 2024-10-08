@@ -1,3 +1,4 @@
+import 'package:e_commrece/core/utils/routes.dart';
 import 'package:e_commrece/features/home/presentation/manager/brands_cubit/brands_cubit.dart';
 import 'package:e_commrece/features/home/presentation/widgets/custom_categories_item.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class CustomBrandsSection extends StatelessWidget {
                     return InkWell(
                         onTap: () {
                           GoRouter.of(context).push('/ProductItems',
-                              extra: state.brandsEntity.data![index].id??"");
+                              extra:CheckApi(res:  state.brandsEntity.data![index].id??"",check: true));
                         },
                         child: CustomCategoriesItem(
                             image: state.brandsEntity.data![index].image ?? "",

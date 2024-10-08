@@ -1,7 +1,9 @@
 import 'package:e_commrece/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/utils/app_styles.dart';
+import '../../../../core/utils/routes.dart';
 import 'custom_categories_item.dart';
 
 class CustomCategoriesSection extends StatelessWidget {
@@ -34,11 +36,18 @@ class CustomCategoriesSection extends StatelessWidget {
                     crossAxisCount: 2, crossAxisSpacing: 5, mainAxisSpacing: 3),
                 itemBuilder: (context, index) {
                   return (state is CategoriesSuccessful)
-                      ? CustomCategoriesItem(
-                          image:
-                              state.categoriesEntity.data![index].image ?? "",
-                          name: state.categoriesEntity.data![index].name ?? "",
-                        )
+                      ? InkWell(
+                    onTap: () {
+                      GoRouter.of(context).push(
+                          '/ProductItems',extra: CheckApi(res: state.categoriesEntity.data![index].id,check: false)
+                      );
+                    },
+                        child: CustomCategoriesItem(
+                            image:
+                                state.categoriesEntity.data![index].image ?? "",
+                            name: state.categoriesEntity.data![index].name ?? "",
+                          ),
+                      )
                       : (state is CategoriesFailure)
                           ? const Center(
                               child:

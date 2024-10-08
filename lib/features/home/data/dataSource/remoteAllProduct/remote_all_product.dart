@@ -7,5 +7,5 @@ import '../../../../../core/errors/error_model.dart';
 abstract class RemoteAllProduct {
 
 
-  Future<Either<ErrorModel, AllProductModel>> getAllProduct(BrandsParams params) ;
+  Future<Either<ErrorModel, AllProductModel>> getAllProduct(AllProductParams params) ;
 }

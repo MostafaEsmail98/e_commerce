@@ -13,7 +13,7 @@ part 'all_product_state.dart';
 class AllProductCubit extends Cubit<AllProductState> {
   AllProductCubit() : super(AllProductInitial());
 
-  getAllProduct(BrandsParams params) async{
+  getAllProduct(AllProductParams params) async{
     emit(AllProductLoading());
     var response =await AllProductUseCase(allProductRepo: AllProductRepoImpl(
         remoteAllProduct: RemoteAllProductImpl(api: DioConsumer(dio: Dio())))).call(params);

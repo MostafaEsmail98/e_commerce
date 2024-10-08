@@ -56,27 +56,19 @@ class _HomeScreenState extends State<HomeScreen> {
           items: [
             FlashyTabBarItem(
                 activeColor: Colors.white,
-                title: const Center(
-                  child: Text(
-                    'Home',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
+                title: const Center(child: Text('Home')),
                 icon: SvgPicture.asset(Assets.imagesHome)),
             FlashyTabBarItem(
                 activeColor: Colors.white,
-                title: const Center(
-                    child: Text('Categories')),
+                title: const Center(child: Text('Categories')),
                 icon: SvgPicture.asset(Assets.imagesCategories)),
             FlashyTabBarItem(
                 activeColor: Colors.white,
-                title: const Center(
-                    child: Text('Favorite')),
+                title: const Center(child: Text('Favorite')),
                 icon: SvgPicture.asset(Assets.imagesFavorite)),
             FlashyTabBarItem(
                 activeColor: Colors.white,
-                title: const Center(
-                    child: Text('Profile')),
+                title: const Center(child: Text('Profile')),
                 icon: SvgPicture.asset(Assets.imagesProfile)),
           ],
         ),

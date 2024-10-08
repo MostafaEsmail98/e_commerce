@@ -12,13 +12,15 @@ part 'categories_state.dart';
 class CategoriesCubit extends Cubit<CategoriesState> {
   CategoriesCubit() : super(CategoriesInitial());
 
+
   getAllCategories() async {
     emit(CategoriesLoading());
     var response = await CategoriesUseCase(
-        categoriesRepo: CategoriesRepoImpl(
-            remoteAllCategories:
-                RemoteAllCategoriesImpl(api: DioConsumer(dio: Dio())))).call();
-    response.fold((failure)=>emit(CategoriesFailure(failure)), (result)=>emit(CategoriesSuccessful(result)));
-
+            categoriesRepo: CategoriesRepoImpl(
+                remoteAllCategories:
+                    RemoteAllCategoriesImpl(api: DioConsumer(dio: Dio()))))
+        .call();
+    response.fold((failure) => emit(CategoriesFailure(failure)),
+        (result) => emit(CategoriesSuccessful(result)));
   }
 }

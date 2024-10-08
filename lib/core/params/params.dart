@@ -32,12 +32,17 @@ class ResetPasswordParams{
 
   ResetPasswordParams({required this.email, required this.newPassword});
 }
-class BrandsParams{
+class AllProductParams{
   final String? id;
+  final bool? check ;
 
-  BrandsParams({required this.id});
+  AllProductParams({required this.check, required this.id});
 }class ProductParams{
   final String? id;
 
   ProductParams({required this.id});
+}class CategoriesTabParams{
+  final String? id;
+
+  CategoriesTabParams({required this.id});
 }
