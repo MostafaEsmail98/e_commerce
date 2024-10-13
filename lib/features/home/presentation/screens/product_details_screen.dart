@@ -12,58 +12,43 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppbarOfCartAndProductDetails
-          .customAppBarOfCartAndProductDetails(context, "Product Details"),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: BlocBuilder<SpecificProductCubit, SpecificProductState>(
-              builder: (context, state) {
-                if (state is SpecificProductSuccessful) {
-                  return Column(
-                    children: [
-                      CustomCarouselOfProduct(
-                        images: state.specificProductEntity.data!.images!,
-                        id: state.specificProductEntity.data!.id!,
-                      ),
-                      const CustomSpaceHeight(height: .02),
-                      CustomDetailsOfItem(
-                        specificProductEntity: state.specificProductEntity,
-                      ),
-                    ],
-                  );
-                } else if (state is SpecificProductFailure) {
-                  return const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: SizedBox(width: 24, child: Icon(Icons.error)),
-                      ));
-                } else {
-                  return const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                }
-              }),
-        ),
-      ),
-      bottomNavigationBar: BlocBuilder<SpecificProductCubit, SpecificProductState>(
-        builder: (context, state) {
-          if (state is SpecificProductSuccessful){
-            return BottomNavOfCheckOrAddItem(
-              price:state.specificProductEntity.data!.price!,
-              title: "Add to Cart",
-            );
-          }
-          else {
-            return const SizedBox() ;
-          }
-
-        },
-      ),
+    return BlocBuilder<SpecificProductCubit, SpecificProductState>(
+      builder: (context, state) {
+        if (state is SpecificProductSuccessful) {
+          return Scaffold(
+              appBar: CustomAppbarOfCartAndProductDetails
+                  .customAppBarOfCartAndProductDetails(
+                      context, "Product Details",true),
+              body: SingleChildScrollView(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      children: [
+                        CustomCarouselOfProduct(
+                          images: state.specificProductEntity.data!.images!,
+                          id: state.specificProductEntity.data!.id!,
+                        ),
+                        const CustomSpaceHeight(height: .02),
+                        CustomDetailsOfItem(
+                          specificProductEntity: state.specificProductEntity,
+                        ),
+                      ],
+                    )),
+              ),
+              bottomNavigationBar: BottomNavOfCheckOrAddItem(
+                check: true,
+                id: state.specificProductEntity.data!.id,
+                price: state.specificProductEntity.data!.price!.toString(),
+                title: "Add to Cart",
+              ));
+        } else if (state is SpecificProductFailure) {
+          return Text(
+            state.errorModel,
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:e_commrece/features/auth/presentation/manager/forget_password_cu
 import 'package:e_commrece/features/auth/presentation/manager/reset_password/reset_password_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/manager/verify_code_cubit/verify_code_cubit.dart';
+import 'package:e_commrece/features/home/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:e_commrece/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
 import 'package:e_commrece/features/home/presentation/manager/get_wishlist_cubit/get_wishlist_cubit.dart';
 import 'package:flutter/foundation.dart';
@@ -60,6 +61,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CategoriesTabCubit(),
+        ),
+        BlocProvider(
+          create: (context) => CartCubit(),
         )
       ],
       child: SafeArea(

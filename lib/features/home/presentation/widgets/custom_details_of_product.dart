@@ -7,8 +7,16 @@ import '../../../../core/utils/custom_space_width.dart';
 
 class CustomDetailsOfProduct extends StatelessWidget {
   const CustomDetailsOfProduct({
-    super.key, required this.type,this.getWishlistEntity,  this.index
+    super.key,
+    required this.type,
+    this.getWishlistEntity,
+    this.index,
+    this.title,
+    this.price,
   });
+
+  final String? title;
+  final num? price;
   final bool type;
   final GetWishlistEntity? getWishlistEntity;
   final int? index;
@@ -20,12 +28,14 @@ class CustomDetailsOfProduct extends StatelessWidget {
       children: [
         const CustomSpaceHeight(height: .01),
         SizedBox(
-          width: MediaQuery.sizeOf(context).width*.35,
+          width: MediaQuery.sizeOf(context).width * .35,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Text(
               overflow: TextOverflow.ellipsis,
-              type==true?getWishlistEntity?.data![index??0].title??"":"",
+              type == true
+                  ? getWishlistEntity?.data![index ?? 0].title ?? ""
+                  : title ?? "",
               style: AppStyles.textMedium18(context),
             ),
           ),
@@ -37,8 +47,7 @@ class CustomDetailsOfProduct extends StatelessWidget {
               height: 15,
               width: 15,
               decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(30)),
+                  color: Colors.black, borderRadius: BorderRadius.circular(30)),
             ),
             const CustomSpaceWidth(width: .02),
             Text(
@@ -51,14 +60,14 @@ class CustomDetailsOfProduct extends StatelessWidget {
         Row(
           children: [
             Text(
-              "EGP ${type==true?getWishlistEntity?.data![index??0].price??"":""}",
+              "EGP ${type == true ? getWishlistEntity?.data![index ?? 0].price : price}",
               style: AppStyles.textMedium18(context),
             ),
             const CustomSpaceWidth(width: .02),
             Text(
               "EGP 750",
-              style: AppStyles.textRegular11(context).copyWith(
-                  decoration: TextDecoration.lineThrough),
+              style: AppStyles.textRegular11(context)
+                  .copyWith(decoration: TextDecoration.lineThrough),
             )
           ],
         )

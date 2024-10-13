@@ -12,6 +12,7 @@ class Endpoints {
   static String specificProduct = "products/";
   static String categoriesTab = "products?category[in]=";
   static String wishlist = "wishlist";
+  static String cart = "cart";
 }
 
 class ApiKey {

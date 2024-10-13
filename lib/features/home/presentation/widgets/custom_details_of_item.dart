@@ -69,7 +69,8 @@ class CustomDetailsOfItem extends StatelessWidget {
             Container(
                 decoration: BoxDecoration(
                     color: mainColor, borderRadius: BorderRadius.circular(24)),
-                child: const CustomNumberOfProduct())
+                child:   const CustomNumberOfProduct(
+                  check: false,))
           ],
         ),
         ListTile(

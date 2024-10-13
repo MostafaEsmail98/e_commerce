@@ -23,7 +23,7 @@ class ListOfFavorite extends StatelessWidget {
           );
         }
         else if (state is GetWishlistFailure) {
-          return const Center(child: Icon(Icons.error),);
+          return  Center(child: Text(state.errorModel),);
         }
         else {
           return const Center(child: CircularProgressIndicator(),);

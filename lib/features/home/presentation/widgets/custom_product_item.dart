@@ -11,6 +11,7 @@ import '../../../../core/utils/app_styles.dart';
 import '../../../../core/utils/custom_space_height.dart';
 import '../../../../core/utils/k_colors.dart';
 import '../../../../generated/assets.dart';
+import '../manager/cart_cubit/cart_cubit.dart';
 
 class CustomProductItem extends StatelessWidget {
   const CustomProductItem({
@@ -42,8 +43,8 @@ class CustomProductItem extends StatelessWidget {
                       fit: BoxFit.cover)),
               GestureDetector(
                   onTap: () {
-                      context.read<GetWishlistCubit>().postWishlist(
-                          PostWishlistParams(productId: dataEntity.id));
+                    context.read<GetWishlistCubit>().postWishlist(
+                        PostWishlistParams(productId: dataEntity.id));
                   },
                   child: SvgPicture.asset(Assets.imagesFavoriteList))
             ],
@@ -83,9 +84,16 @@ class CustomProductItem extends StatelessWidget {
                     ),
                     SvgPicture.asset(Assets.imagesStar),
                     const Spacer(),
-                    SvgPicture.asset(
-                      Assets.imagesAdd,
-                      height: MediaQuery.sizeOf(context).height * .04,
+                    InkWell(
+                      onTap: () {
+                        context
+                            .read<CartCubit>()
+                            .addCart(CartParams(productId: dataEntity.id));
+                      },
+                      child: SvgPicture.asset(
+                        Assets.imagesAdd,
+                        height: MediaQuery.sizeOf(context).height * .04,
+                      ),
                     )
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:e_commrece/core/utils/k_colors.dart';
+import 'package:e_commrece/features/home/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:e_commrece/features/home/presentation/screens/tabs/categories.dart';
 import 'package:e_commrece/features/home/presentation/screens/tabs/favorite.dart';
 import 'package:e_commrece/features/home/presentation/screens/tabs/home.dart';
@@ -42,22 +43,37 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<GetWishlistCubit, GetWishlistState>(
-      listener: (context, state) {
-        if (state is PostWishlistSuccessful) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.postWishlistModel.message!)));
-        } else if (state is PostWishlistFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorModel)));
-        } else if (state is DeleteWishlistSuccessful) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.deleteWishlistModel.message!)));
-        }else if (state is DeleteWishlistFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorModel)));
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<GetWishlistCubit, GetWishlistState>(
+          listener: (context, state) {
+            if (state is PostWishlistSuccessful) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.postWishlistModel.message!)));
+            } else if (state is PostWishlistFailure) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.errorModel)));
+            } else if (state is DeleteWishlistSuccessful) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.deleteWishlistModel.message!)));
+            } else if (state is DeleteWishlistFailure) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.errorModel)));
+            }
+          },
+        ),
+        BlocListener<CartCubit, CartState>(
+          listener: (context, state) {
+            if (state is CartAddSuccessful) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.res)));
+            } else if (state is CartAddFailure) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.error)));
+            }
+          },
+        )
+      ],
       child: Scaffold(
         body: pages[_currentIndex],
         bottomNavigationBar: ClipRRect(

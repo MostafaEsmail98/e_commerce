@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commrece/core/params/params.dart';
+import 'package:e_commrece/features/home/domain/entity/cart_entity.dart';
 import 'package:e_commrece/features/home/domain/entity/get_wishlist_entity.dart';
 import 'package:e_commrece/features/home/presentation/manager/get_wishlist_cubit/get_wishlist_cubit.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +11,25 @@ import '../../../../core/utils/app_styles.dart';
 import '../../../../core/utils/custom_space_width.dart';
 import '../../../../core/utils/k_colors.dart';
 import '../../../../generated/assets.dart';
+import '../manager/cart_cubit/cart_cubit.dart';
 import 'custom_details_of_product.dart';
 import 'custom_number_of_product.dart';
 
 class CustomItemOfProduct extends StatelessWidget {
   const CustomItemOfProduct(
-      {super.key, required this.type, this.getWishlistEntity, this.index});
+      {super.key,
+      required this.type,
+      this.getWishlistEntity,
+      this.index,
+      this.cartEntity,
+      this.index1});
 
   final bool type;
   final int? index;
+  final int? index1;
 
   final GetWishlistEntity? getWishlistEntity;
+  final CartEntity? cartEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +46,19 @@ class CustomItemOfProduct extends StatelessWidget {
               ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: CachedNetworkImage(
-                      imageUrl:
-                          getWishlistEntity?.data?[index ?? 0].imageCover ??
+                      imageUrl: type == true
+                          ? getWishlistEntity?.data![index ?? 0].imageCover ??
+                              ""
+                          : cartEntity?.data?.products?[index1 ?? 0].product
+                                  ?.imageCover ??
                               "")),
               const CustomSpaceWidth(width: .03),
               CustomDetailsOfProduct(
-                  type: true,
+                  title:
+                      cartEntity?.data?.products![index1 ?? 0].product?.title ??
+                          "",
+                  price: cartEntity?.data?.products![index1 ?? 0].price ?? 0,
+                  type: type,
                   getWishlistEntity: getWishlistEntity,
                   index: index),
               const Spacer(),
@@ -54,8 +70,16 @@ class CustomItemOfProduct extends StatelessWidget {
                   children: [
                     InkWell(
                         onTap: () {
-                          context.read<GetWishlistCubit>().deleteWishlist(
-                              PostWishlistParams(productId: getWishlistEntity!.data?[index ?? 0].id));
+                          if (type == true) {
+                            context.read<GetWishlistCubit>().deleteWishlist(
+                                PostWishlistParams(
+                                    productId: getWishlistEntity!
+                                        .data?[index ?? 0].id));
+                          } else {
+                            context.read<CartCubit>().deleteCart(CartParams(
+                                productId: cartEntity!
+                                    .data?.products![index1 ?? 0].product!.id));
+                          }
                         },
                         child: SvgPicture.asset(Assets.imagesDelete)),
                     const Spacer(),
@@ -65,20 +89,36 @@ class CustomItemOfProduct extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: type == true
-                          ? Center(
-                              child: FittedBox(
+                          ? FittedBox(
                               fit: BoxFit.scaleDown,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5.0, horizontal: 8),
-                                child: Text(
-                                  "Add to Cart",
-                                  style: AppStyles.textMedium14(context)
-                                      .copyWith(color: Colors.white),
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (type == true) {
+                                    context.read<CartCubit>().addCart(
+                                        CartParams(
+                                            productId: getWishlistEntity!
+                                                .data?[index ?? 0].id));
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 5.0, horizontal: 8),
+                                  child: Text(
+                                    "Add to Cart",
+                                    style: AppStyles.textMedium14(context)
+                                        .copyWith(color: Colors.white),
+                                  ),
                                 ),
                               ),
-                            ))
-                          : const CustomNumberOfProduct(),
+                            )
+                          : CustomNumberOfProduct(
+                        check: true,
+                              count: cartEntity
+                                  ?.data?.products?[index1 ?? 0].count
+                                  ?.toInt(),
+                              id: cartEntity
+                                  ?.data?.products?[index1 ?? 0].product!.id,
+                            ),
                     )
                   ],
                 ),

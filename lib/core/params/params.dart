@@ -12,10 +12,15 @@ class SignUpParams {
   final String name;
   final String mobil;
 
-  SignUpParams({required this.name, required this.mobil, required this.email, required this.password, required  this.rePassword});
+  SignUpParams(
+      {required this.name,
+      required this.mobil,
+      required this.email,
+      required this.password,
+      required this.rePassword});
 }
 
-class ForgetPasswordParams{
+class ForgetPasswordParams {
   final String email;
 
   ForgetPasswordParams({required this.email});
@@ -26,27 +31,42 @@ class VerifyCodeParams {
 
   VerifyCodeParams({required this.resetCode});
 }
-class ResetPasswordParams{
+
+class ResetPasswordParams {
   final String email;
   final String newPassword;
 
   ResetPasswordParams({required this.email, required this.newPassword});
 }
-class AllProductParams{
+
+class AllProductParams {
   final String? id;
-  final bool? check ;
+  final bool? check;
 
   AllProductParams({required this.check, required this.id});
-}class ProductParams{
+}
+
+class ProductParams {
   final String? id;
 
   ProductParams({required this.id});
-}class CategoriesTabParams{
+}
+
+class CategoriesTabParams {
   final String? id;
 
   CategoriesTabParams({required this.id});
-}class PostWishlistParams{
+}
+
+class PostWishlistParams {
   final String? productId;
 
   PostWishlistParams({required this.productId});
+}
+
+class CartParams {
+  final String? productId;
+  final int? count;
+
+  CartParams({this.count, required this.productId});
 }
