@@ -5,7 +5,7 @@ import '../../../../core/utils/k_colors.dart';
 
 class CustomFieldOfProfile extends StatelessWidget {
   const CustomFieldOfProfile({
-    super.key, required this.title, required this.content,
+    super.key, required this.title, required this.content
   });
   final String title ;
   final String content ;
@@ -38,4 +38,5 @@ class CustomFieldOfProfile extends StatelessWidget {
       ],
     );
   }
+
 }

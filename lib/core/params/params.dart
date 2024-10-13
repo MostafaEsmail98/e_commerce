@@ -70,3 +70,27 @@ class CartParams {
 
   CartParams({this.count, required this.productId});
 }
+
+class UpdateUserParams {
+  final String? name;
+  final String? email;
+  final String? phone;
+  final String? id ;
+
+  UpdateUserParams({this.id,
+     this.name,
+     this.email,
+     this.phone,
+  });
+}
+class ChangePasswordParams {
+  final String? currentPassword;
+  final String? password;
+  final String? rePassword;
+
+
+  ChangePasswordParams({this.currentPassword,
+     this.password,
+     this.rePassword,
+  });
+}

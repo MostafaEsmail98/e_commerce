@@ -42,13 +42,10 @@ class CustomBrandsSection extends StatelessWidget {
                 );
               }
               else if (state is BrandsFailure) {
-                return const Center(
-                    child: SizedBox(width: 24, child: Icon(Icons.error)));
+                return  Center(
+                    child: Text(state.errorModel));
               } else {
-                return const SizedBox(
-                    width: 50,
-                    height: 24,
-                    child: Center(child: CircularProgressIndicator()));
+                return const Center(child: CircularProgressIndicator());
               }
             },
           ),

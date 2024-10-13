@@ -13,6 +13,9 @@ class Endpoints {
   static String categoriesTab = "products?category[in]=";
   static String wishlist = "wishlist";
   static String cart = "cart";
+  static String updateUser = "users/updateMe/";
+  static String getUser = "users/";
+  static String changePassword = "users/changeMyPassword";
 }
 
 class ApiKey {

@@ -14,8 +14,8 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => CategoriesTabCubit()..getCategoriesTab(
-            CategoriesTabParams(id: "6439d5b90049ad0b52b90048")),
+      create: (context) => CategoriesTabCubit()
+        ..getCategoriesTab(CategoriesTabParams(id: "6439d5b90049ad0b52b90048")),
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
@@ -31,15 +31,15 @@ class Categories extends StatelessWidget {
                           builder: (context, state) {
                             if (state is CategoriesSuccessful) {
                               return const CustomListOfCategories();
-                            } else if (state is CategoriesLoading) {
-                              return const Expanded(
-                                  child:
-                                  Center(child: CircularProgressIndicator()));
+                            } else if (state is CategoriesFailure) {
+                              return Expanded(
+                                  child: Center(
+                                child: Text(state.errorModel),
+                              ));
                             } else {
                               return const Expanded(
                                   child: Center(
-                                    child: Icon(Icons.error),
-                                  ));
+                                      child: CircularProgressIndicator()));
                             }
                           },
                         )),

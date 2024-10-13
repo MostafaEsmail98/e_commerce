@@ -52,7 +52,7 @@ class CustomButton extends StatelessWidget {
               );
             }, listener: (BuildContext context, SignInState state) {
               if (state is SignInSuccessful){
-                CacheHelper().put(key: "token", value: state.signInEntity.token);
+                CacheHelper.put(key: "token", value: state.signInEntity.token);
                 GoRouter.of(context).push("/Home");
               }
           },

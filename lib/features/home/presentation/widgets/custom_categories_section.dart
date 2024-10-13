@@ -37,26 +37,28 @@ class CustomCategoriesSection extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return (state is CategoriesSuccessful)
                       ? InkWell(
-                    onTap: () {
-                      GoRouter.of(context).push(
-                          '/ProductItems',extra: CheckApi(res: state.categoriesEntity.data![index].id,check: false)
-                      );
-                    },
-                        child: CustomCategoriesItem(
+                          onTap: () {
+                            GoRouter.of(context).push('/ProductItems',
+                                extra: CheckApi(
+                                    res: state.categoriesEntity.data![index].id,
+                                    check: false));
+                          },
+                          child: CustomCategoriesItem(
                             image:
                                 state.categoriesEntity.data![index].image ?? "",
-                            name: state.categoriesEntity.data![index].name ?? "",
+                            name:
+                                state.categoriesEntity.data![index].name ?? "",
                           ),
-                      )
+                        )
                       : (state is CategoriesFailure)
-                          ? const Center(
-                              child:
-                                  SizedBox(width: 24, child: Icon(Icons.error)))
+                          ? FittedBox(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(state.errorModel),
+                              ),
+                            )
                           : const Center(
-                              child: SizedBox(
-                                  width: 24,
-                                  height: 24,
-                                  child: CircularProgressIndicator()));
+                              child: CircularProgressIndicator());
                 },
               );
             },
