@@ -1,4 +1,6 @@
 import 'package:e_commrece/core/params/params.dart';
+import 'package:e_commrece/features/auth/presentation/manager/forget_password_cubit/forget_password_cubit.dart';
+import 'package:e_commrece/features/auth/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/screens/forget_password.dart';
 import 'package:e_commrece/features/auth/presentation/screens/reset_password.dart';
 import 'package:e_commrece/features/auth/presentation/screens/sign_in.dart';
@@ -12,34 +14,51 @@ import 'package:e_commrece/features/home/presentation/screens/product_details_sc
 import 'package:e_commrece/features/home/presentation/screens/product_items.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
+import '../../features/auth/presentation/manager/reset_password/reset_password_cubit.dart';
+import '../../features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
+import '../../features/auth/presentation/manager/verify_code_cubit/verify_code_cubit.dart';
 import '../../features/splash/splash.dart';
 
 abstract class AppRouter {
   static final routes = GoRouter(routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => const Splash(),
     ),
     GoRoute(
       path: '/SignIn',
-      builder: (context, state) => const SignIn(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => SignInCubit(),
+        child: const SignIn(),
+      ),
     ),
     GoRoute(
       path: '/SignUp',
-      builder: (context, state) => const SignUp(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => SignUpCubit(),
+        child: const SignUp(),
+      ),
     ),
     GoRoute(
       path: '/ForgetPassword',
-      builder: (context, state) => const ForgetPassword(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => ForgetPasswordCubit(),
+        child: const ForgetPassword(),
+      ),
     ),
     GoRoute(
       path: '/VerifyCode',
-      builder: (context, state) => const VerifyCode(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => VerifyCodeCubit(),
+        child: const VerifyCode(),
+      ),
     ),
     GoRoute(
       path: '/ResetPassword',
-      builder: (context, state) => const ResetPassword(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => ResetPasswordCubit(),
+        child: const ResetPassword(),
+      ),
     ),
     GoRoute(
       path: '/Home',
@@ -50,8 +69,9 @@ abstract class AppRouter {
         builder: (context, state) {
           var res = state.extra as CheckApi?;
           return BlocProvider(
-            create: (context) =>
-                AllProductCubit()..getAllProduct(AllProductParams(id: res?.res,check: res?.check)),
+            create: (context) => AllProductCubit()
+              ..getAllProduct(
+                  AllProductParams(id: res?.res, check: res?.check)),
             child: const ProductItems(),
           );
         }),
@@ -72,9 +92,10 @@ abstract class AppRouter {
     ),
   ]);
 }
-class CheckApi{
-   String? res;
-   bool? check ;
 
-   CheckApi({this.res, this.check});
+class CheckApi {
+  String? res;
+  bool? check;
+
+  CheckApi({this.res, this.check});
 }

@@ -5,53 +5,45 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/bottom_nav_of_check_or_add_item.dart';
 import '../widgets/custom_item_of_product.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
-}
-
-class _CartScreenState extends State<CartScreen> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<CartCubit>().getCart();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartCubit, CartState>(
-      builder: (context, state) {
-        if (state is CartSuccessful) {
-          return Scaffold(
-            appBar: CustomAppbarOfCartAndProductDetails
-                .customAppBarOfCartAndProductDetails(context, "Cart",false),
-            body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: ListView.builder(
-                  itemCount: state.cartEntity.data?.products?.length,
-                  itemBuilder: (context, index) {
-                    return CustomItemOfProduct(
-                      cartEntity: state.cartEntity,
-                      index1: index,
-                      type: false,
-                    );
-                  },
-                )),
-            bottomNavigationBar: BottomNavOfCheckOrAddItem(
-              title: "Check Out",
-              price: state.cartEntity.data!.totalCartPrice.toString(),
-              check: false,
-            ),
-          );
-        } else if (state is CartFailure) {
-          return Scaffold(
-              body: Center(child: SizedBox(child: Text(state.error))));
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
+    return BlocProvider(
+      create: (context) => CartCubit()..getCart(),
+      child: BlocBuilder<CartCubit, CartState>(
+        builder: (context, state) {
+          if (state is CartSuccessful) {
+            return Scaffold(
+              appBar: CustomAppbarOfCartAndProductDetails
+                  .customAppBarOfCartAndProductDetails(context, "Cart", false),
+              body: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: ListView.builder(
+                    itemCount: state.cartEntity.data?.products?.length,
+                    itemBuilder: (context, index) {
+                      return CustomItemOfProduct(
+                        cartEntity: state.cartEntity,
+                        index1: index,
+                        type: false,
+                      );
+                    },
+                  )),
+              bottomNavigationBar: BottomNavOfCheckOrAddItem(
+                title: "Check Out",
+                price: state.cartEntity.data!.totalCartPrice.toString(),
+                check: false,
+              ),
+            );
+          } else if (state is CartFailure) {
+            return Scaffold(
+                body: Center(child: SizedBox(child: Text(state.error))));
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
   }
 }

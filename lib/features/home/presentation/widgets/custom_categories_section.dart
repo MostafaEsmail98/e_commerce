@@ -13,58 +13,64 @@ class CustomCategoriesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Text(
-              "Categories",
-              style: AppStyles.textSemiBold24(context),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: MediaQuery.sizeOf(context).height * .3,
-          child: BlocBuilder<CategoriesCubit, CategoriesState>(
-            builder: (context, state) {
-              return GridView.builder(
-                itemCount: (state is CategoriesSuccessful)
-                    ? state.categoriesEntity.data!.length
-                    : 10,
-                scrollDirection: Axis.horizontal,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, crossAxisSpacing: 5, mainAxisSpacing: 3),
-                itemBuilder: (context, index) {
-                  return (state is CategoriesSuccessful)
-                      ? InkWell(
-                          onTap: () {
-                            GoRouter.of(context).push('/ProductItems',
-                                extra: CheckApi(
-                                    res: state.categoriesEntity.data![index].id,
-                                    check: false));
-                          },
-                          child: CustomCategoriesItem(
-                            image:
-                                state.categoriesEntity.data![index].image ?? "",
-                            name:
-                                state.categoriesEntity.data![index].name ?? "",
-                          ),
-                        )
-                      : (state is CategoriesFailure)
-                          ? FittedBox(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(state.errorModel),
-                              ),
-                            )
-                          : const Center(
-                              child: CircularProgressIndicator());
-                },
-              );
-            },
+    return BlocProvider(
+      create: (context) => CategoriesCubit()..getAllCategories(),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "Categories",
+                style: AppStyles.textSemiBold24(context),
+              ),
+            ],
           ),
-        )
-      ],
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * .3,
+            child: BlocBuilder<CategoriesCubit, CategoriesState>(
+              builder: (context, state) {
+                return GridView.builder(
+                  itemCount: (state is CategoriesSuccessful)
+                      ? state.categoriesEntity.data!.length
+                      : 10,
+                  scrollDirection: Axis.horizontal,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 3),
+                  itemBuilder: (context, index) {
+                    return (state is CategoriesSuccessful)
+                        ? InkWell(
+                            onTap: () {
+                              GoRouter.of(context).push('/ProductItems',
+                                  extra: CheckApi(
+                                      res: state
+                                          .categoriesEntity.data![index].id,
+                                      check: false));
+                            },
+                            child: CustomCategoriesItem(
+                              image:
+                                  state.categoriesEntity.data![index].image ??
+                                      "",
+                              name: state.categoriesEntity.data![index].name ??
+                                  "",
+                            ),
+                          )
+                        : (state is CategoriesFailure)
+                            ? FittedBox(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(state.errorModel),
+                                ),
+                              )
+                            : const Center(child: CircularProgressIndicator());
+                  },
+                );
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 }

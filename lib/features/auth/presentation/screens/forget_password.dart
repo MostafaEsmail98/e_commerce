@@ -14,96 +14,96 @@ class ForgetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backGround,
-      body: BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
-        listener: (context, state) {
-         if  (state is ForgetPasswordSuccessful ){
-           GoRouter.of(context).push("/VerifyCode");
-         }
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Colors.white,
-              content: state is ForgetPasswordSuccessful
-                  ? Text(
-                      state.passwordEntity.message,
-                      style: const TextStyle(color: Colors.black),
-                    )
-                  : state is ForgetPasswordFailure
-                      ? Text(state.errorModel,
-                          style: const TextStyle(color: Colors.black))
-                      : const Text("Loading",style:TextStyle(color: Colors.black)),
-            ),
-          );
-        },
-        child: Form(
-          key: context.read<ForgetPasswordCubit>().key,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                const CustomLogo(),
-                Text(
-                  "Forget Password",
-                  style: AppStyles.textSemiBold24(context)
-                      .copyWith(color: Colors.white),
-                ),
-                const CustomSpaceHeight(height: .02),
-                CustomTextField(
-                    validator: (val) {
-                      if (val!.isEmpty) {
-                        return "Password cannot be empty";
-                      } else if (val.length < 8) {
-                        return "Password should be more than 7 letters";
-                      }
-                      return null;
-                    },
-                    text: "Enter Your Email",
-                    controller:
-                        context.read<ForgetPasswordCubit>().emailController,
-                    title: "E-mail"),
-                const CustomSpaceHeight(height: .03),
-                ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            const WidgetStatePropertyAll(Color(0xff06004F)),
-                        shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)))),
-                    onPressed: () {
-                      if (context
-                          .read<ForgetPasswordCubit>()
-                          .key
-                          .currentState!
-                          .validate()) {
-                        context
+        backgroundColor: backGround,
+        body: BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
+          listener: (context, state) {
+           if  (state is ForgetPasswordSuccessful ){
+             GoRouter.of(context).push("/VerifyCode");
+             context
+                 .read<ForgetPasswordCubit>()
+                 .emailController.clear();
+           }
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.white,
+                content: state is ForgetPasswordSuccessful
+                    ? Text(
+                        state.passwordEntity.message,
+                        style: const TextStyle(color: Colors.black),
+                      )
+                    : state is ForgetPasswordFailure
+                        ? Text(state.errorModel,
+                            style: const TextStyle(color: Colors.black))
+                        : const Text("Loading",style:TextStyle(color: Colors.black)),
+              ),
+            );
+          },
+          child: Form(
+            key: context.read<ForgetPasswordCubit>().key,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: [
+                  const CustomLogo(),
+                  Text(
+                    "Forget Password",
+                    style: AppStyles.textSemiBold24(context)
+                        .copyWith(color: Colors.white),
+                  ),
+                  const CustomSpaceHeight(height: .02),
+                  CustomTextField(
+                      validator: (val) {
+                        if (val!.isEmpty) {
+                          return "Password cannot be empty";
+                        } else if (val.length < 8) {
+                          return "Password should be more than 7 letters";
+                        }
+                        return null;
+                      },
+                      text: "Enter Your Email",
+                      controller:
+                          context.read<ForgetPasswordCubit>().emailController,
+                      title: "E-mail"),
+                  const CustomSpaceHeight(height: .03),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              const WidgetStatePropertyAll(Color(0xff06004F)),
+                          shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)))),
+                      onPressed: () {
+                        if (context
                             .read<ForgetPasswordCubit>()
-                            .postForgetPasswordUser();
-                        context
-                            .read<ForgetPasswordCubit>()
-                      .emailController.text="";
-                      }
-                    },
-                    child: SizedBox(
-                      height: MediaQuery.sizeOf(context).height * .06,
-                      width: double.maxFinite,
-                      child: Center(child:
-                          BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
-                        builder: (context, state) {
-                          if (state is ForgetPasswordLoading){
-                            return const CircularProgressIndicator();
-                          }
-                          return Text(
-                            "Send Code",
-                            style: AppStyles.textSemiBold18(context)
-                                .copyWith(color: Colors.white),
-                          );
-                        },
-                      )),
-                    ))
-              ],
+                            .key
+                            .currentState!
+                            .validate()) {
+                          context
+                              .read<ForgetPasswordCubit>()
+                              .postForgetPasswordUser();
+                        }
+                      },
+                      child: SizedBox(
+                        height: MediaQuery.sizeOf(context).height * .06,
+                        width: double.maxFinite,
+                        child: Center(child:
+                            BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
+                          builder: (context, state) {
+                            if (state is ForgetPasswordLoading){
+                              return const CircularProgressIndicator();
+                            }
+                            return Text(
+                              "Send Code",
+                              style: AppStyles.textSemiBold18(context)
+                                  .copyWith(color: Colors.white),
+                            );
+                          },
+                        )),
+                      ))
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

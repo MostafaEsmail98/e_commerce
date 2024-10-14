@@ -88,8 +88,6 @@ class SignIn extends StatelessWidget {
                   onPressed: () {
                     if ( context.read<SignInCubit>().key.currentState!.validate()) {
                       context.read<SignInCubit>().postUser();
-                      context.read<SignInCubit>().passwordController.text="";
-                      context.read<SignInCubit>().emailController.text="";
                     }
                   },
                 ),

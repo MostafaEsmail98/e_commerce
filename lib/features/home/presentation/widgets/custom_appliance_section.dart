@@ -14,7 +14,9 @@ class CustomBrandsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return BlocProvider(
+  create: (context) => BrandsCubit()..getBrands(),
+  child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
@@ -51,6 +53,7 @@ class CustomBrandsSection extends StatelessWidget {
           ),
         )
       ],
-    );
+    ),
+);
   }
 }

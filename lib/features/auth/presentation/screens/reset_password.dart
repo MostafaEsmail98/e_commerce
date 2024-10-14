@@ -19,7 +19,6 @@ class ResetPassword extends StatelessWidget {
       body: Form(
         key: context.read<ResetPasswordCubit>().key,
         child: Padding(
-
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [

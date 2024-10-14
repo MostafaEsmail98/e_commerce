@@ -13,9 +13,18 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CategoriesTabCubit()
-        ..getCategoriesTab(CategoriesTabParams(id: "6439d5b90049ad0b52b90048")),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+          CategoriesTabCubit()
+            ..getCategoriesTab(
+                CategoriesTabParams(id: "6439d5b90049ad0b52b90048")),
+        ),
+        BlocProvider(
+          create: (context) => CategoriesCubit()..getAllCategories(),
+        ),
+      ],
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
@@ -34,8 +43,8 @@ class Categories extends StatelessWidget {
                             } else if (state is CategoriesFailure) {
                               return Expanded(
                                   child: Center(
-                                child: Text(state.errorModel),
-                              ));
+                                    child: Text(state.errorModel),
+                                  ));
                             } else {
                               return const Expanded(
                                   child: Center(
