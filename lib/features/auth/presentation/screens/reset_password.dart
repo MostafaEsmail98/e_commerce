@@ -1,9 +1,11 @@
 import 'package:e_commrece/core/utils/k_colors.dart';
+import 'package:e_commrece/core/utils/routes.dart';
 import 'package:e_commrece/core/utils/string.dart';
 import 'package:e_commrece/features/auth/presentation/manager/reset_password/reset_password_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/widgets/custom_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/app_styles.dart';
 import '../../../../core/utils/custom_space_height.dart';
@@ -76,25 +78,33 @@ class ResetPassword extends StatelessWidget {
                 child: SizedBox(
                   height: MediaQuery.sizeOf(context).height * .06,
                   width: double.maxFinite,
-                  child: Center(child:
-                      BlocBuilder<ResetPasswordCubit, ResetPasswordState>(
-                    builder: (context, state) {
-                      if (state is ResetPasswordLoading) {
-                        return const CircularProgressIndicator();
-                      } else if (state is ResetPasswordSuccessful) {
+                  child: Center(
+                      child:
+                          BlocListener<ResetPasswordCubit, ResetPasswordState>(
+                    listener: (context, state) {
+                      if (state is ResetPasswordSuccessful) {
+                        GoRouter.of(context).push(AppRouter.home);
+                      }
+                    },
+                    child: BlocBuilder<ResetPasswordCubit, ResetPasswordState>(
+                      builder: (context, state) {
+                        if (state is ResetPasswordLoading) {
+                          return const CircularProgressIndicator();
+                        } else if (state is ResetPasswordSuccessful) {
+                          return Text(
+                            "Done",
+                            style: AppStyles.textSemiBold18(context),
+                          );
+                        } else if (state is ResetPasswordFailure) {
+                          return Text(state.errorModel,
+                              style: AppStyles.textSemiBold18(context));
+                        }
                         return Text(
-                          "Done",
+                          "Sign In",
                           style: AppStyles.textSemiBold18(context),
                         );
-                      } else if (state is ResetPasswordFailure) {
-                        return Text(state.errorModel,
-                            style: AppStyles.textSemiBold18(context));
-                      }
-                      return Text(
-                        "Sign In",
-                        style: AppStyles.textSemiBold18(context),
-                      );
-                    },
+                      },
+                    ),
                   )),
                 ),
               ),

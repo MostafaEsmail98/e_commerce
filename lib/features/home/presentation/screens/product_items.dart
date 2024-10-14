@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/utils/routes.dart';
+
 class ProductItems extends StatelessWidget {
   const ProductItems({super.key});
 
@@ -74,7 +76,7 @@ class ProductItems extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return InkWell(
                               onTap: () {
-                                GoRouter.of(context).push('/ProductDetails',
+                                GoRouter.of(context).push(AppRouter.productDetails,
                                     extra:
                                         state.allProductEntity.data![index].id);
                               },

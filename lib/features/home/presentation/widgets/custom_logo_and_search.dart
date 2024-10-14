@@ -1,3 +1,4 @@
+import 'package:e_commrece/core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -50,7 +51,7 @@ class CustomLogoAndSearch extends StatelessWidget {
               padding: const EdgeInsets.only(left: 16.0),
               child: GestureDetector(
                   onTap: () {
-                    GoRouter.of(context).push("/Cart");
+                    GoRouter.of(context).push(AppRouter.cart);
                   },
                   child: SvgPicture.asset(Assets.imagesCart)),
             )

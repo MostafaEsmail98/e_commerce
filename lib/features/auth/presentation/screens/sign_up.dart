@@ -1,5 +1,6 @@
 import 'package:e_commrece/core/utils/app_styles.dart';
 import 'package:e_commrece/core/utils/custom_space_height.dart';
+import 'package:e_commrece/core/utils/routes.dart';
 import 'package:e_commrece/core/utils/string.dart';
 import 'package:e_commrece/features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/widgets/custom_logo.dart';
@@ -160,7 +161,7 @@ class SignUp extends StatelessWidget {
                   Center(
                     child: CustomTextButton(
                       onPressed: () {
-                        GoRouter.of(context).push("/SignIn");
+                        GoRouter.of(context).push(AppRouter.signIn);
                       },
                       text: "Do have an account? Sign In",
                     ),

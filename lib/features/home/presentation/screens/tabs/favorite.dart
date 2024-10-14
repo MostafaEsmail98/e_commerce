@@ -52,7 +52,7 @@ class Favorite extends StatelessWidget {
             },
           )
         ],
-        child: Padding(
+        child: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [

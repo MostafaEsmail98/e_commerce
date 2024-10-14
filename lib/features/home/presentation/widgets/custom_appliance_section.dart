@@ -34,7 +34,7 @@ class CustomBrandsSection extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                         onTap: () {
-                          GoRouter.of(context).push('/ProductItems',
+                          GoRouter.of(context).push(AppRouter.productItems,
                               extra:CheckApi(res:  state.brandsEntity.data![index].id??"",check: true));
                         },
                         child: CustomCategoriesItem(

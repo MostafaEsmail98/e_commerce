@@ -1,3 +1,4 @@
+import 'package:e_commrece/core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -30,7 +31,7 @@ class CustomAppbarOfCartAndProductDetails{
         const SizedBox(width: 16),
        check == true ?  InkWell(
             onTap: () {
-              GoRouter.of(context).push("/Cart");
+              GoRouter.of(context).push(AppRouter.cart);
             },
             child: SvgPicture.asset(Assets.imagesCart)):const SizedBox(),
         const SizedBox(width: 16),

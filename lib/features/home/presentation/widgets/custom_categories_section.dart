@@ -42,7 +42,7 @@ class CustomCategoriesSection extends StatelessWidget {
                     return (state is CategoriesSuccessful)
                         ? InkWell(
                             onTap: () {
-                              GoRouter.of(context).push('/ProductItems',
+                              GoRouter.of(context).push(AppRouter.productItems,
                                   extra: CheckApi(
                                       res: state
                                           .categoriesEntity.data![index].id,

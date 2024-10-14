@@ -1,5 +1,6 @@
 import 'package:e_commrece/core/utils/custom_space_height.dart';
 import 'package:e_commrece/core/utils/k_colors.dart';
+import 'package:e_commrece/core/utils/routes.dart';
 import 'package:e_commrece/features/auth/presentation/manager/verify_code_cubit/verify_code_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/widgets/custom_logo.dart';
 import 'package:e_commrece/features/auth/presentation/widgets/custom_text_field.dart';
@@ -18,7 +19,7 @@ class VerifyCode extends StatelessWidget {
         body: BlocListener<VerifyCodeCubit, VerifyCodeState>(
     listener: (context, state) {
       if  (state is VerifyCodeSuccessful ){
-        GoRouter.of(context).push("/ResetPassword");
+        GoRouter.of(context).push(AppRouter.resetPassword);
       }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

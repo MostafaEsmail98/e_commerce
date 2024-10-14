@@ -9,8 +9,9 @@ import '../../../../core/utils/app_styles.dart';
 import '../../../../core/utils/routes.dart';
 
 class CustomSubCategories extends StatelessWidget {
-  const CustomSubCategories({super.key,});
-
+  const CustomSubCategories({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +27,17 @@ class CustomSubCategories extends StatelessWidget {
                     if (state is CategoriesTabSuccessful) {
                       return GridView.builder(
                         itemCount: state.categoriesTabEntity.data!.length,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 4 / 7, crossAxisCount: 3),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                childAspectRatio: 4 / 7, crossAxisCount: 3),
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             onTap: () {
                               GoRouter.of(context).push(
-                                '/ProductItems',
+                                AppRouter.productItems,
                                 extra: CheckApi(
-                                    res: state.categoriesTabEntity
-                                        .data![index].category!
-                                        .id,
+                                    res: state.categoriesTabEntity.data![index]
+                                        .category!.id,
                                     check: false),
                               );
                             },
@@ -47,9 +48,8 @@ class CustomSubCategories extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(16),
                                     child: CachedNetworkImage(
-                                      imageUrl:
-                                      state.categoriesTabEntity.data![index]
-                                          .imageCover!,
+                                      imageUrl: state.categoriesTabEntity
+                                          .data![index].imageCover!,
                                     ),
                                   ),
                                 ),
@@ -60,8 +60,8 @@ class CustomSubCategories extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 2.0),
                                     child: Text(
-                                      state.categoriesTabEntity
-                                          .data![index].subcategory![0].name!,
+                                      state.categoriesTabEntity.data![index]
+                                          .subcategory![0].name!,
                                       style: AppStyles.textRegular14(context),
                                     ),
                                   ),
@@ -71,17 +71,14 @@ class CustomSubCategories extends StatelessWidget {
                           );
                         },
                       );
-                    }
-                    else if (state is CategoriesTabFailure) {
-                      return  Center(child: Text(state.errorModel));
-                    }
-                    else {
+                    } else if (state is CategoriesTabFailure) {
+                      return Center(child: Text(state.errorModel));
+                    } else {
                       return const Center(child: CircularProgressIndicator());
                     }
                   },
                 );
-              }
-              else {
+              } else {
                 return const Expanded(
                     child: Center(child: CircularProgressIndicator()));
               }

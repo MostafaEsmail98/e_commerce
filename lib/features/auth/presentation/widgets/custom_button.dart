@@ -1,5 +1,6 @@
 import 'package:e_commrece/core/database/cache/cache_helper.dart';
 import 'package:e_commrece/core/utils/app_styles.dart';
+import 'package:e_commrece/core/utils/routes.dart';
 import 'package:e_commrece/features/auth/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +54,7 @@ class CustomButton extends StatelessWidget {
             }, listener: (BuildContext context, SignInState state) {
               if (state is SignInSuccessful){
                 CacheHelper.put(key: "token", value: state.signInEntity.token);
-                GoRouter.of(context).push("/Home");
+                GoRouter.of(context).push(AppRouter.home);
                 context.read<SignInCubit>().passwordController.clear();
                 context.read<SignInCubit>().emailController.clear();
               }

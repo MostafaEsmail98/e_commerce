@@ -20,52 +20,61 @@ import '../../features/auth/presentation/manager/verify_code_cubit/verify_code_c
 import '../../features/splash/splash.dart';
 
 abstract class AppRouter {
+  static const String signIn = "/SignIn";
+  static const String signUp = "/SignUp";
+  static const String forgetPassword="/ForgetPassword";
+  static const String cart = "/Cart";
+  static const String verifyCode = "/VerifyCode";
+  static const String resetPassword = "/ResetPassword";
+  static const String home = "/Home";
+  static const String productItems = "/ProductItems";
+  static const String productDetails = "/ProductDetails";
   static final routes = GoRouter(routes: [
     GoRoute(
       path: '/',
       builder: (context, state) => const Splash(),
     ),
     GoRoute(
-      path: '/SignIn',
+      path: signIn,
       builder: (context, state) => BlocProvider(
         create: (context) => SignInCubit(),
         child: const SignIn(),
       ),
     ),
     GoRoute(
-      path: '/SignUp',
+      path: signUp,
       builder: (context, state) => BlocProvider(
         create: (context) => SignUpCubit(),
         child: const SignUp(),
       ),
     ),
     GoRoute(
-      path: '/ForgetPassword',
+      path: forgetPassword,
       builder: (context, state) => BlocProvider(
         create: (context) => ForgetPasswordCubit(),
         child: const ForgetPassword(),
       ),
     ),
     GoRoute(
-      path: '/VerifyCode',
+      path: verifyCode,
       builder: (context, state) => BlocProvider(
         create: (context) => VerifyCodeCubit(),
         child: const VerifyCode(),
       ),
     ),
     GoRoute(
-      path: '/ResetPassword',
+      path: resetPassword,
       builder: (context, state) => BlocProvider(
         create: (context) => ResetPasswordCubit(),
         child: const ResetPassword(),
       ),
     ),
     GoRoute(
-      path: '/Home',
+      path: home,
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-        path: '/ProductItems',
+        path: productItems,
         builder: (context, state) {
           var res = state.extra as CheckApi?;
           return BlocProvider(
@@ -76,11 +85,11 @@ abstract class AppRouter {
           );
         }),
     GoRoute(
-      path: '/Cart',
+      path: cart,
       builder: (context, state) => const CartScreen(),
     ),
     GoRoute(
-      path: '/ProductDetails',
+      path: productDetails,
       builder: (context, state) {
         var res = state.extra as String?;
         return BlocProvider(

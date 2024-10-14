@@ -1,5 +1,6 @@
 import 'package:e_commrece/core/utils/app_styles.dart';
 import 'package:e_commrece/core/utils/k_colors.dart';
+import 'package:e_commrece/core/utils/routes.dart';
 import 'package:e_commrece/core/utils/string.dart';
 import 'package:e_commrece/features/auth/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:e_commrece/features/auth/presentation/widgets/custom_text_button.dart';
@@ -80,7 +81,7 @@ class SignIn extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: CustomTextButton(
                         onPressed: () {
-                          GoRouter.of(context).push('/ForgetPassword');
+                          GoRouter.of(context).push(AppRouter.forgetPassword);
                         },
                         text: "Forget password")),
                 const CustomSpaceHeight(height: .03),
@@ -95,7 +96,7 @@ class SignIn extends StatelessWidget {
                  Center(
                   child: CustomTextButton(
                     onPressed: () {
-                      GoRouter.of(context).push("/SignUp");
+                      GoRouter.of(context).push(AppRouter.signUp);
                     },
                     text: "Don’t have an account? Create Account",
                   ),
