@@ -49,28 +49,32 @@ class _CustomListOfCategoriesState extends State<CustomListOfCategories> {
                         child: Container(
                           color: context.read<CategoriesTabCubit>().active == index ? null : strokColor,
                           padding:
-                              const EdgeInsets.only(left: 5, top: 5, bottom: 5),
-                          child: Row(
-                            children: [
-                              Container(
-                                decoration: context.read<CategoriesTabCubit>().active == index
-                                    ? BoxDecoration(
-                                        color: mainColor,
-                                        borderRadius: BorderRadius.circular(12))
-                                    : null,
-                                width: 5,
-                                height: 75,
-                              ),
-                              const CustomSpaceWidth(width: .01),
-                              FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(
-                                  state.categoriesEntity.data![index].name ??
-                                      "",
-                                  style: AppStyles.textMedium14(context),
+                              const EdgeInsets.all(5),
+                          child: FittedBox(
+                            alignment: Alignment.centerLeft,
+                            fit: BoxFit.scaleDown,
+                            child: Row(
+                              children: [
+                                Container(
+                                  decoration: context.read<CategoriesTabCubit>().active == index
+                                      ? BoxDecoration(
+                                          color: mainColor,
+                                          borderRadius: BorderRadius.circular(12))
+                                      : null,
+                                  width: 5,
+                                  height: 75,
                                 ),
-                              )
-                            ],
+                                const CustomSpaceWidth(width: .01),
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    state.categoriesEntity.data![index].name ??
+                                        "",
+                                    style: AppStyles.textMedium14(context),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       );

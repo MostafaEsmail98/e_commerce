@@ -125,11 +125,6 @@ class SignUp extends StatelessWidget {
                             .currentState!
                             .validate()) {
                           context.read<SignUpCubit>().postNewUser();
-                          context.read<SignUpCubit>().emailController.text="";
-                          context.read<SignUpCubit>().passwordController.text="";
-                          context.read<SignUpCubit>().rePasswordController.text="";
-                          context.read<SignUpCubit>().mobilController.text="";
-                          context.read<SignUpCubit>().nameController.text="";
                         }
                       },
                       child: SizedBox(
@@ -138,7 +133,7 @@ class SignUp extends StatelessWidget {
                             .height * .06,
                         width: double.maxFinite,
                         child:
-                        Center(child: BlocBuilder<SignUpCubit, SignUpState>(
+                        Center(child: BlocConsumer<SignUpCubit, SignUpState>(
                           builder: (context, state) {
                             if (state is SignUpLoading) {
                               return const CircularProgressIndicator();
@@ -155,7 +150,16 @@ class SignUp extends StatelessWidget {
                               "Sign Up",
                               style: AppStyles.textSemiBold18(context),
                             );
-                          },
+                          }, listener: (BuildContext context, SignUpState state) {
+                            if (state is SignUpSuccessful){
+                              context.read<SignUpCubit>().emailController.clear();
+                              context.read<SignUpCubit>().passwordController.clear();
+                              context.read<SignUpCubit>().rePasswordController.clear();
+                              context.read<SignUpCubit>().mobilController.clear();
+                              context.read<SignUpCubit>().nameController.clear();
+                              GoRouter.of(context).push(AppRouter.signIn);
+                            }
+                        },
                         )),
                       )),
                   Center(

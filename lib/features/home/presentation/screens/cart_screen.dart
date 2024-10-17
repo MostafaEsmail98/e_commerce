@@ -40,7 +40,8 @@ class CartScreen extends StatelessWidget {
             return Scaffold(
                 body: Center(child: SizedBox(child: Text(state.error))));
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Scaffold(
+                body: Center(child: CircularProgressIndicator()));
           }
         },
       ),

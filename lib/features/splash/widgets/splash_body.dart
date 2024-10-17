@@ -17,7 +17,7 @@ class _SplashBodyState extends State<SplashBody> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3,),() {
-      GoRouter.of(context).push(AppRouter.signIn);
+      GoRouter.of(context).pushReplacement(AppRouter.signIn);
     },);
     super.initState();
   }

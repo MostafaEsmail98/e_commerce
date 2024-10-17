@@ -32,18 +32,20 @@ class BottomNavOfCheckOrAddItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Column(
-              children: [
-                Text(
-                  "Total price",
-                  style: AppStyles.textMedium18(context)
-                      .copyWith(color: const Color(0xff06004F)),
-                ),
-                Text(
-                  "EGP $price",
-                  style: AppStyles.textMedium18(context),
-                )
-              ],
+            FittedBox(
+              child: Column(
+                children: [
+                  Text(
+                    "Total price",
+                    style: AppStyles.textMedium18(context)
+                        .copyWith(color: const Color(0xff06004F)),
+                  ),
+                  Text(
+                    "EGP $price",
+                    style: AppStyles.textMedium18(context),
+                  )
+                ],
+              ),
             ),
             InkWell(
               onTap: () async {
