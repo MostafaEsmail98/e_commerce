@@ -4,7 +4,11 @@ import 'package:e_commrece/features/home/presentation/manager/update_user_cubit/
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../../core/database/cache/cache_helper.dart';
 import '../../../../../core/utils/k_colors.dart';
+import '../../../../../core/utils/routes.dart';
 import '../../../../../generated/assets.dart';
 import '../../widgets/custom_field_of_profile.dart';
 
@@ -26,6 +30,20 @@ class Profile extends StatelessWidget {
           } else if (state is ChangePasswordSuccessful) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.result)));
+            context
+                .read<UpdateUserCubit>()
+                .currentPasswordController
+                .clear();
+            context
+                .read<UpdateUserCubit>()
+                .newPasswordController
+                .clear();
+            context
+                .read<UpdateUserCubit>()
+                .renewPasswordController
+                .clear();
+            CacheHelper.removeData(key: "token");
+            GoRouter.of(context).pushReplacement(AppRouter.signIn);
           } else if (state is ChangePasswordFailure) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.error)));
@@ -128,18 +146,6 @@ class Profile extends StatelessWidget {
                                   .read<UpdateUserCubit>()
                                   .renewPasswordController, () {
                             context.read<UpdateUserCubit>().changePassword();
-                            context
-                                .read<UpdateUserCubit>()
-                                .currentPasswordController
-                                .clear();
-                            context
-                                .read<UpdateUserCubit>()
-                                .newPasswordController
-                                .clear();
-                            context
-                                .read<UpdateUserCubit>()
-                                .renewPasswordController
-                                .clear();
                             Navigator.of(context).pop();
                           });
                         },
@@ -181,6 +187,21 @@ class Profile extends StatelessWidget {
                         title: 'Your Address',
                         content: '6th October, street 11.....',
                       ),
+                      Align(
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                              style: const ButtonStyle(
+                                  backgroundColor:
+                                      WidgetStatePropertyAll(mainColor)),
+                              onPressed: () {
+                                CacheHelper.removeData(key: "token");
+                                GoRouter.of(context).pushReplacement(AppRouter.signIn);
+                              },
+                              child: Text(
+                                "Sign Out",
+                                style: AppStyles.textRegular14(context)
+                                    .copyWith(color: Colors.white),
+                              )))
                     ],
                   ),
                 );

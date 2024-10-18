@@ -55,7 +55,7 @@ class RemoteUpdateUserImpl extends RemoteUpdateUser{
         "password":params.password,
         "rePassword":params.rePassword
       });
-      return Right(response["statusMsg"]);
+      return Right(response["message"]);
     }  catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromServer(e));
