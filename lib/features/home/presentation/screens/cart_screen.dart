@@ -8,6 +8,8 @@ import '../widgets/custom_item_of_product.dart';
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

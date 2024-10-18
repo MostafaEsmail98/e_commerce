@@ -6,6 +6,7 @@ import 'package:e_commrece/core/errors/exceptions.dart';
 import 'package:e_commrece/core/params/params.dart';
 import 'package:e_commrece/features/home/data/dataSource/remoteCart/remote_cart.dart';
 import 'package:e_commrece/features/home/data/models/cart_model.dart';
+import 'package:e_commrece/features/home/data/models/checkout_model.dart';
 
 
 
@@ -64,6 +65,20 @@ class RemoteCartImpl extends RemoteCart {
         "productId":params.productId
       });
       return Right(response["message"]);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromServer(e));
+      } else {
+        return Left(ServerFailure(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, CheckoutModel>> checkout(String id)async {
+    try {
+      var response = await api.post(Endpoints.checkout+id);
+      return Right(CheckoutModel.fromJson(response));
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromServer(e));

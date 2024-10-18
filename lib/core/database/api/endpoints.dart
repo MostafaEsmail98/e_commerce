@@ -16,6 +16,7 @@ class Endpoints {
   static String updateUser = "users/updateMe/";
   static String getUser = "users/";
   static String changePassword = "users/changeMyPassword";
+  static String checkout = "orders/checkout-session/";
 }
 
 class ApiKey {

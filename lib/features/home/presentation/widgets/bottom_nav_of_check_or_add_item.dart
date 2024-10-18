@@ -57,6 +57,8 @@ class BottomNavOfCheckOrAddItem extends StatelessWidget {
                     context.read<CartCubit>().countCart(CartParams(
                         productId: id, count: context.read<CartCubit>().count));
                   }
+                }else{
+                  context.read<CartCubit>().launch();
                 }
               },
               child: Container(
