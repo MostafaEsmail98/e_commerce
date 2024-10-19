@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:e_commrece/core/database/api/dio_consumer.dart';
 import 'package:e_commrece/core/database/cache/cache_helper.dart';
 import 'package:e_commrece/core/params/params.dart';
+import 'package:e_commrece/core/utils/services_locator.dart';
 import 'package:e_commrece/features/home/data/dataSource/remoteUpdateUser/remote_update_user_impl.dart';
 import 'package:e_commrece/features/home/data/models/update_user_model.dart';
 import 'package:e_commrece/features/home/data/repository/update_user_repo_impl.dart';
@@ -68,11 +69,7 @@ class UpdateUserCubit extends Cubit<UpdateUserState> {
   getUser() async {
     var id = JWT.decode(CacheHelper.getData(key: "token"));
     emit(GetUserLoading());
-    var response = await UpdateUserUseCase(
-            updateUserRepo: UpdateUserRepoImpl(
-                remoteUpdateUser:
-                    RemoteUpdateUserImpl(api: DioConsumer(dio: Dio()))))
-        .callGetUser(UpdateUserParams(id: id.payload["id"]));
+    var response = await getIt.get<UpdateUserUseCase>().callGetUser(UpdateUserParams(id: id.payload["id"]));
     response.fold((failure) => emit(GetUserFailure(failure.message)), (result) {
       nameController.text = result.data?.name ?? "";
       emailController.text = result.data?.email ?? "";

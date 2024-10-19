@@ -6,13 +6,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'bloc_observer.dart';
 import 'core/database/cache/cache_helper.dart';
+import 'core/utils/services_locator.dart';
 void main() async {
+  setup();
   await Hive.initFlutter();
   await Hive.openBox(CacheHelper.myBox);
   runApp(DevicePreview(
     builder: (BuildContext context) => const MyApp(),
     enabled: !kReleaseMode,
   ));
+
   Bloc.observer = MyBlocObserver();
 }
 
