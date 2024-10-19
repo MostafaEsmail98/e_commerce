@@ -54,7 +54,7 @@ class CustomButton extends StatelessWidget {
             }, listener: (BuildContext context, SignInState state) {
               if (state is SignInSuccessful){
                 CacheHelper.put(key: "token", value: state.signInEntity.token);
-                GoRouter.of(context).push(AppRouter.home);
+                GoRouter.of(context).pushReplacement(AppRouter.home);
                 context.read<SignInCubit>().passwordController.clear();
                 context.read<SignInCubit>().emailController.clear();
               }
