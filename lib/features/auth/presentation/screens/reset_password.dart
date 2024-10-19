@@ -67,12 +67,6 @@ class ResetPassword extends StatelessWidget {
                       .currentState!
                       .validate()) {
                     context.read<ResetPasswordCubit>().resetPassword();
-                    context
-                        .read<ResetPasswordCubit>()
-                        .newPasswordController
-                        .text = "";
-                    context.read<ResetPasswordCubit>().emailController.text =
-                        "";
                   }
                 },
                 child: SizedBox(
@@ -83,7 +77,15 @@ class ResetPassword extends StatelessWidget {
                           BlocListener<ResetPasswordCubit, ResetPasswordState>(
                     listener: (context, state) {
                       if (state is ResetPasswordSuccessful) {
-                        GoRouter.of(context).push(AppRouter.home);
+                        GoRouter.of(context).pushReplacement(AppRouter.signIn);
+                        context
+                            .read<ResetPasswordCubit>()
+                            .newPasswordController
+                            .clear();
+                        context
+                            .read<ResetPasswordCubit>()
+                            .emailController
+                            .clear();
                       }
                     },
                     child: BlocBuilder<ResetPasswordCubit, ResetPasswordState>(
@@ -100,7 +102,7 @@ class ResetPassword extends StatelessWidget {
                               style: AppStyles.textSemiBold18(context));
                         }
                         return Text(
-                          "Sign In",
+                          "Reset Password",
                           style: AppStyles.textSemiBold18(context),
                         );
                       },
