@@ -85,11 +85,15 @@ class ProductDetailsScreen extends StatelessWidget {
                     title: "Add to Cart",
                   ));
             } else if (state is SpecificProductFailure) {
-              return Text(
-                state.errorModel,
+              return Scaffold(
+                body: Center(
+                  child: Text(
+                    state.errorModel,
+                  ),
+                ),
               );
             } else {
-              return const Center(child: CircularProgressIndicator());
+              return const Scaffold(body: Center(child: CircularProgressIndicator()));
             }
           },
         ),
