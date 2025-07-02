@@ -1,6 +1,7 @@
 # 📱 E-Commerce with Clean Architecture
 
 ## 📝 About  
+
 **E-Commerce with Clean Architecture** is a modern, user-friendly eCommerce application built with **Flutter** and **Dart**. It delivers a seamless shopping experience, allowing users to browse and purchase products effortlessly. Designed for both Android and iOS platforms, the app ensures smooth, responsive performance.
 
 ---
